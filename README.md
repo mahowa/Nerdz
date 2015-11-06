@@ -20,7 +20,7 @@ Matt W
 •	Work with Matt to integrate the system together
 
 Anne
-•	Make a data structure to display all of the sprite scenes using ‘qGraphicsScene’ and display them on the actual GUI
+•	Make frame viewer. Using a QGraphicsScenes to set each frame. Like dan you will be given the scenes but make your own for testing for now
 
 Charlie
 •	Make the .h files for all classes in the UML and fill in the attributes & functions – HIGH PRIORITY
