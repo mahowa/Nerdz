@@ -39,7 +39,7 @@ o	We’ll do the connecting later, we just need it to be able to fire a signal
 o	Remember the 40000chips shows a good way to rotate things, move, etc….
 
 
-![alt tag](https://raw.github.com/username/projectname/branch/path/to/img.png)
+![alt tag](https://cloud.githubusercontent.com/assets/10621646/10986702/9c5a3c96-83e9-11e5-88e4-2b83f47a0ff7.png)
 
 
 
