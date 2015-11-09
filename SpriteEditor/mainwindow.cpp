@@ -3,6 +3,11 @@
 #include <math.h>
 #include <spriteeditorview.h>
 
+// Testing Includes
+#include <iostream>
+#include <stdio.h>
+#include <stdlib.h>
+
 /*
  * Tile
  */
@@ -26,7 +31,22 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     //Set up the tiles
     populateScene();
 
+    // Set isTransformed to false
+    isTransformed = false;
 
+    // Set isRotated to false
+    isRotated = false;
+
+<<<<<<< HEAD
+=======
+    // Connect signals to slots
+    connect (ui->xAxisTrans, SIGNAL(clicked(bool)), this, SLOT(xAxisTransSlot()));
+    connect (ui->yAxisTrans, SIGNAL(clicked(bool)), this, SLOT(yAxisTransSlot()));
+    connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
+
+
+
+>>>>>>> origin/master
 }
 
 MainWindow::~MainWindow()
@@ -105,4 +125,60 @@ void MainWindow::populateScene()
     }
 }
 
+<<<<<<< HEAD
 
+=======
+void MainWindow::xAxisTransSlot() {
+    std::cout << "Printing X-Axis Transformation" << std::endl;
+    //QTransform xAxisTrans(Qt::XAxis);
+    //ui->SpriteEditor->transform();
+   // QTransform transform;
+    //transform.rotate(90, Qt::;
+    //ui->SpriteEditor->setTransform(transform);
+   // ui->SpriteEditor->show();
+    //ui->SpriteEditor->rotate(180);
+   // ui->SpriteEditor->setTransform(QTransform::fromScale(-1,1));
+   // ui->SpriteEditor->setTransform(QTransform::fromTranslate(-1,1));
+   // ui->SpriteEditor->show();
+    if (isRotated == false)
+        ui->SpriteEditor->scale(1,-1);
+    else
+        ui->SpriteEditor->scale(-1,1);
+     // ui->SpriteEditor->setMatrix();
+
+      if (isTransformed == false)
+          isTransformed = true;
+      else
+          isTransformed = false;
+}
+
+void MainWindow::yAxisTransSlot() {
+    std::cout << "Printing Y-Axis Transformation" << std::endl;
+    if (isRotated == false)
+        ui->SpriteEditor->scale(-1,1);
+    else
+        ui->SpriteEditor->scale(1,-1);
+
+    if (isTransformed == false)
+        isTransformed = true;
+    else
+        isTransformed = false;
+}
+
+void MainWindow::rotateTransSlot() {
+    std::cout << "Printing Rotate Transformation" << std::endl;
+    //ui->SpriteEditor->rotate(90);
+    //ui->SpriteEditor->setTransform(QTransform().translate(0, 0).rotate(90).translate(-0, -0));
+
+    if (isTransformed == true)
+        ui->SpriteEditor->rotate(-90);
+    else
+        ui->SpriteEditor->rotate(90);
+
+    if (isRotated == false)
+        isRotated = true;
+    else
+        isRotated = false;
+
+}
+>>>>>>> origin/master
