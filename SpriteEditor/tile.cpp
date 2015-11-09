@@ -37,17 +37,14 @@ void Tile::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
 void Tile::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    QGraphicsItem::mousePressEvent(event);
+    //QGraphicsItem::mousePressEvent(event);
     color = Qt::black;
     update();
 
+
 }
 
-bool Tile::sceneEvent ( QEvent * event ){
-    if(event->Enter){
 
-    }
-}
 
 
 void Tile::hoverEnterEvent(QGraphicsSceneHoverEvent * event){

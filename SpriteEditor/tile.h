@@ -19,7 +19,7 @@ protected:
     void hoverEnterEvent(QGraphicsSceneHoverEvent * event)Q_DECL_OVERRIDE;
     void hoverLeaveEvent(QGraphicsSceneHoverEvent * event)Q_DECL_OVERRIDE;
     //virtual void leaveEvent(QEvent * event);
-    bool sceneEvent ( QEvent * event )Q_DECL_OVERRIDE;
+    //bool sceneEvent ( QEvent * event )Q_DECL_OVERRIDE;
 
 
 private:
