@@ -1,6 +1,7 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 #include <math.h>
+#include <spriteeditorview.h>
 
 /*
  * Tile
@@ -14,7 +15,7 @@
 #include <QColor>
 #include <QRgb>
 #include<QGraphicsRectItem>
-
+#include<QMouseEvent>
 
 
 //Constructor
@@ -24,9 +25,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
     //Set up the tiles
     populateScene();
-
-
-
 
 
 }
@@ -44,14 +42,14 @@ bool boolSwap(bool a){
 
 void MainWindow::populateScene()
 {
-    SpriteEditorScene = new QGraphicsScene;
+    spriteEditorScene = new QGraphicsScene;
 
 
     /*
      * Scene is the object that has all the properties
      * for displaying what we want
      */
-    ui->SpriteEditor->setScene(SpriteEditorScene);
+    ui->SpriteEditor->setScene(spriteEditorScene);
 
 
 
@@ -101,8 +99,10 @@ void MainWindow::populateScene()
             //item->setBrush(color);
 
             item->setPos(QPointF(j, i));
-            SpriteEditorScene->addItem(item);
+            spriteEditorScene->addItem(item);
 
         }
     }
 }
+
+

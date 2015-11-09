@@ -12,9 +12,9 @@ Tile::Tile(const QColor &color, int x, int y, int width)
     this->squareSide = width;
     //setZValue((x + y) % 2);
 
-    setFlags(ItemIsSelectable);
-    setAcceptHoverEvents(true);
-    setAcceptDrops(true);
+    QGraphicsItem::setFlags(ItemIsSelectable);
+    QGraphicsItem::setAcceptHoverEvents(true);
+    QGraphicsItem::setAcceptDrops(true);
 }
 
 QRectF Tile::boundingRect() const
@@ -37,15 +37,27 @@ void Tile::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
 void Tile::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    //QGraphicsItem::mousePressEvent(event);
+    QGraphicsItem::mousePressEvent(event);
     color = Qt::black;
     update();
 
-
 }
+void Tile::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
+    QGraphicsItem::mouseMoveEvent(event);
 
+    //Start A drag event
+    QDrag *drag = new QDrag(event->widget());
+    QMimeData *mime = new QMimeData;
+    drag->setMimeData(mime);
+    drag->exec();
+    mousePressEvent(event);
+}
+void Tile::dragEnterEvent(QGraphicsSceneDragDropEvent * event){
+    QGraphicsItem::dragEnterEvent(event);
 
-
+      color = Qt::black;
+      update();
+}
 
 void Tile::hoverEnterEvent(QGraphicsSceneHoverEvent * event){
     color = color.lighter(50);

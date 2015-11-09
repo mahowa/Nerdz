@@ -20,7 +20,8 @@ public:
 private:
     Ui::MainWindow *ui;
     void populateScene();
-    QGraphicsScene *SpriteEditorScene;
+    QGraphicsScene *spriteEditorScene;
+
 };
 
 #endif // MAINWINDOW_H
