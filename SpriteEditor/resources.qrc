@@ -1,0 +1,7 @@
+<RCC>
+    <qresource prefix="/">
+        <file>xAxisTrans.png</file>
+        <file>yAxisTrans.png</file>
+        <file>rotate.png</file>
+    </qresource>
+</RCC>

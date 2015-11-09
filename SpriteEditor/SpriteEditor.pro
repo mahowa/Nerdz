@@ -20,3 +20,6 @@ HEADERS  += mainwindow.h \
     tile.h
 
 FORMS    += mainwindow.ui
+
+RESOURCES += \
+    resources.qrc

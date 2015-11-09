@@ -16,11 +16,17 @@ public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
 
+public slots:
+    void xAxisTransSlot();
+    void yAxisTransSlot();
+    void rotateTransSlot();
 
 private:
     Ui::MainWindow *ui;
     void populateScene();
     QGraphicsScene *SpriteEditorScene;
+    bool isTransformed;
+    bool isRotated;
 };
 
 #endif // MAINWINDOW_H
