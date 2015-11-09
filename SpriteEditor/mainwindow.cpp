@@ -37,8 +37,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     // Set isRotated to false
     isRotated = false;
 
-<<<<<<< HEAD
-=======
+
     // Connect signals to slots
     connect (ui->xAxisTrans, SIGNAL(clicked(bool)), this, SLOT(xAxisTransSlot()));
     connect (ui->yAxisTrans, SIGNAL(clicked(bool)), this, SLOT(yAxisTransSlot()));
@@ -46,7 +45,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
 
 
->>>>>>> origin/master
 }
 
 MainWindow::~MainWindow()
@@ -125,9 +123,8 @@ void MainWindow::populateScene()
     }
 }
 
-<<<<<<< HEAD
 
-=======
+
 void MainWindow::xAxisTransSlot() {
     std::cout << "Printing X-Axis Transformation" << std::endl;
     //QTransform xAxisTrans(Qt::XAxis);
@@ -181,4 +178,4 @@ void MainWindow::rotateTransSlot() {
         isRotated = false;
 
 }
->>>>>>> origin/master
+

@@ -24,14 +24,13 @@ public slots:
 private:
     Ui::MainWindow *ui;
     void populateScene();
-<<<<<<< HEAD
+
     QGraphicsScene *spriteEditorScene;
 
-=======
     QGraphicsScene *SpriteEditorScene;
     bool isTransformed;
     bool isRotated;
->>>>>>> origin/master
+
 };
 
 #endif // MAINWINDOW_H
