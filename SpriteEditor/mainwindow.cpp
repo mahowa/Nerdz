@@ -21,15 +21,26 @@
 #include <QRgb>
 #include<QGraphicsRectItem>
 #include<QMouseEvent>
+<<<<<<< HEAD
 #include<QColorDialog>
+=======
+#include <QPushButton>
+#include <QColorDialog>
+#include <QTimer>
+
+>>>>>>> origin/master
 
 //Constructor
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
 
-    //Set up the tiles
-    populateScene();
+    //Initialize sceneIndex
+    sceneIndex = 0;
+
+    //Start SceneTimer
+    sceneTimer = new QTimer(this);
+    sceneTimer->start(100);
 
     // Set isTransformed to false
     isTransformed = false;
@@ -42,9 +53,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->xAxisTrans, SIGNAL(clicked(bool)), this, SLOT(xAxisTransSlot()));
     connect (ui->yAxisTrans, SIGNAL(clicked(bool)), this, SLOT(yAxisTransSlot()));
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
+    connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
+    connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
+    //connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
+   // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
 
 
+<<<<<<< HEAD
     color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
+=======
+    //Set up the tiles
+    populateScene();
+>>>>>>> origin/master
 
 }
 
@@ -120,24 +140,59 @@ void MainWindow::populateScene()
             item->setPos(QPointF(j, i));
             spriteEditorScene->addItem(item);
 
+
+            // Small view example
+            QGraphicsScene *testScene(spriteEditorScene);
+            ui->smallView1->setScene(testScene);
+            QRectF bounds = testScene->itemsBoundingRect();
+            ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+            ui->smallView1->centerOn(0,0);
+
         }
+
+      //Add current scene to scenesView
+      //*currentScene = spriteEditorScene;//(spriteEditorScene);
+      scenes.push_back(spriteEditorScene);
+      QRectF bounds = spriteEditorScene->itemsBoundingRect();
+      ui->scenesView->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+     // ui->scenesView->centerOn(0,0);
+
+      //updateScene();
+
     }
+}
+
+void MainWindow::newScene()
+{
+    populateScene();
+}
+
+void MainWindow::updateScene()
+{
+   // if(ui->setRange->isChecked())
+   // {
+       // ui->toBox->setEnabled();
+       // if(ui->fromBui->fromBox->value() > 0 || ui->toBox->value() > 0)
+      //      break breakme;
+   // }
+
+
+
+    ui->scenesView->setScene(scenes[sceneIndex]);
+    if(sceneIndex == scenes.size() - 1)
+    {
+        sceneIndex = 0;
+        return;
+    }
+
+    sceneIndex++;
 }
 
 
 
 void MainWindow::xAxisTransSlot() {
     std::cout << "Printing X-Axis Transformation" << std::endl;
-    //QTransform xAxisTrans(Qt::XAxis);
-    //ui->SpriteEditor->transform();
-   // QTransform transform;
-    //transform.rotate(90, Qt::;
-    //ui->SpriteEditor->setTransform(transform);
-   // ui->SpriteEditor->show();
-    //ui->SpriteEditor->rotate(180);
-   // ui->SpriteEditor->setTransform(QTransform::fromScale(-1,1));
-   // ui->SpriteEditor->setTransform(QTransform::fromTranslate(-1,1));
-   // ui->SpriteEditor->show();
+
     if (isRotated == false)
         ui->SpriteEditor->scale(1,-1);
     else
@@ -165,8 +220,6 @@ void MainWindow::yAxisTransSlot() {
 
 void MainWindow::rotateTransSlot() {
     std::cout << "Printing Rotate Transformation" << std::endl;
-    //ui->SpriteEditor->rotate(90);
-    //ui->SpriteEditor->setTransform(QTransform().translate(0, 0).rotate(90).translate(-0, -0));
 
     if (isTransformed == true)
         ui->SpriteEditor->rotate(-90);
@@ -180,3 +233,8 @@ void MainWindow::rotateTransSlot() {
 
 }
 
+
+//void MainWindow::on_horizontalSlider_valueChanged(int value)
+//{
+    //sceneTimer(200 * );
+//}

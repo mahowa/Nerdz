@@ -599,6 +599,7 @@ compiler_rcc_make_all: qrc_resources.cpp
 compiler_rcc_clean:
 	-$(DEL_FILE) qrc_resources.cpp
 qrc_resources.cpp: ../SpriteEditor/resources.qrc \
+		../SpriteEditor/colorPickerIcon.png \
 		../SpriteEditor/yAxisTrans.png \
 		../SpriteEditor/rotate.png \
 		../SpriteEditor/xAxisTrans.png

@@ -3,5 +3,6 @@
         <file>xAxisTrans.png</file>
         <file>yAxisTrans.png</file>
         <file>rotate.png</file>
+        <file>colorPickerIcon.png</file>
     </qresource>
 </RCC>
