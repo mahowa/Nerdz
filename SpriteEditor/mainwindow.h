@@ -28,6 +28,7 @@ public slots:
     void rotateTransSlot();
     void newScene();
     void updateScene();
+    void setRangeToggled();
 
 private:
     Ui::MainWindow *ui;
@@ -38,7 +39,6 @@ private:
     int sceneIndex;
 
     QGraphicsScene *spriteEditorScene;
-    QGraphicsScene* currentScene;
 
     bool isTransformed;
     bool isRotated;

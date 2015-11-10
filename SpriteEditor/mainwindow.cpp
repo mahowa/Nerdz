@@ -51,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
     connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
+   // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
 
     //Set up the tiles
     populateScene();
@@ -156,9 +157,17 @@ void MainWindow::newScene()
     populateScene();
 }
 
-
 void MainWindow::updateScene()
 {
+   // if(ui->setRange->isChecked())
+   // {
+       // ui->toBox->setEnabled();
+       // if(ui->fromBui->fromBox->value() > 0 || ui->toBox->value() > 0)
+      //      break breakme;
+   // }
+
+
+
     ui->scenesView->setScene(scenes[sceneIndex]);
     if(sceneIndex == scenes.size() - 1)
     {

@@ -16,9 +16,12 @@
 #include <QtWidgets/QDockWidget>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QToolButton>
@@ -37,6 +40,11 @@ public:
     QToolButton *colorChooser;
     QGraphicsView *scenesView;
     QPushButton *newScene;
+    QSpinBox *fromBox;
+    QSpinBox *toBox;
+    QLabel *label;
+    QLabel *label_2;
+    QRadioButton *setRange;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -94,6 +102,22 @@ public:
         newScene = new QPushButton(centralWidget);
         newScene->setObjectName(QStringLiteral("newScene"));
         newScene->setGeometry(QRect(530, 660, 112, 34));
+        fromBox = new QSpinBox(centralWidget);
+        fromBox->setObjectName(QStringLiteral("fromBox"));
+        fromBox->setGeometry(QRect(860, 240, 45, 25));
+        toBox = new QSpinBox(centralWidget);
+        toBox->setObjectName(QStringLiteral("toBox"));
+        toBox->setEnabled(false);
+        toBox->setGeometry(QRect(950, 240, 45, 25));
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(810, 240, 68, 19));
+        label_2 = new QLabel(centralWidget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setGeometry(QRect(920, 240, 68, 19));
+        setRange = new QRadioButton(centralWidget);
+        setRange->setObjectName(QStringLiteral("setRange"));
+        setRange->setGeometry(QRect(800, 210, 119, 23));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -133,6 +157,9 @@ public:
         rotateTrans->setText(QApplication::translate("MainWindow", "...", 0));
         colorChooser->setText(QApplication::translate("MainWindow", "...", 0));
         newScene->setText(QApplication::translate("MainWindow", "New", 0));
+        label->setText(QApplication::translate("MainWindow", "From:", 0));
+        label_2->setText(QApplication::translate("MainWindow", "To:", 0));
+        setRange->setText(QApplication::translate("MainWindow", "Set Range", 0));
     } // retranslateUi
 
 };
