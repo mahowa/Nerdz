@@ -1,7 +1,7 @@
 /********************************************************************************
 ** Form generated from reading UI file 'mainwindow.ui'
 **
-** Created by: Qt User Interface Compiler version 5.5.1
+** Created by: Qt User Interface Compiler version 5.5.0
 **
 ** WARNING! All changes made in this file will be lost when recompiling UI file!
 ********************************************************************************/
@@ -16,8 +16,13 @@
 #include <QtWidgets/QDockWidget>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHeaderView>
+#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QRadioButton>
+#include <QtWidgets/QSlider>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QToolButton>
@@ -34,7 +39,15 @@ public:
     QToolButton *xAxisTrans;
     QToolButton *rotateTrans;
     QToolButton *colorChooser;
-    QToolButton *colorChooser_2;
+    QGraphicsView *scenesView;
+    QPushButton *newScene;
+    QSpinBox *fromBox;
+    QSpinBox *toBox;
+    QLabel *label;
+    QLabel *label_2;
+    QRadioButton *setRange;
+    QSlider *speedSlider;
+    QSpinBox *spinBox;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -83,10 +96,38 @@ public:
         icon3.addFile(QStringLiteral(":/colorPickerIcon.png"), QSize(), QIcon::Normal, QIcon::Off);
         colorChooser->setIcon(icon3);
         colorChooser->setIconSize(QSize(81, 71));
-        colorChooser_2 = new QToolButton(centralWidget);
-        colorChooser_2->setObjectName(QStringLiteral("colorChooser_2"));
-        colorChooser_2->setGeometry(QRect(640, 280, 81, 71));
-        colorChooser_2->setIconSize(QSize(81, 71));
+        scenesView = new QGraphicsView(centralWidget);
+        scenesView->setObjectName(QStringLiteral("scenesView"));
+        scenesView->setGeometry(QRect(800, 0, 200, 200));
+        scenesView->setFrameShape(QFrame::StyledPanel);
+        scenesView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        scenesView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        newScene = new QPushButton(centralWidget);
+        newScene->setObjectName(QStringLiteral("newScene"));
+        newScene->setGeometry(QRect(530, 660, 112, 34));
+        fromBox = new QSpinBox(centralWidget);
+        fromBox->setObjectName(QStringLiteral("fromBox"));
+        fromBox->setGeometry(QRect(860, 240, 45, 25));
+        toBox = new QSpinBox(centralWidget);
+        toBox->setObjectName(QStringLiteral("toBox"));
+        toBox->setEnabled(false);
+        toBox->setGeometry(QRect(950, 240, 45, 25));
+        label = new QLabel(centralWidget);
+        label->setObjectName(QStringLiteral("label"));
+        label->setGeometry(QRect(810, 240, 68, 19));
+        label_2 = new QLabel(centralWidget);
+        label_2->setObjectName(QStringLiteral("label_2"));
+        label_2->setGeometry(QRect(920, 240, 68, 19));
+        setRange = new QRadioButton(centralWidget);
+        setRange->setObjectName(QStringLiteral("setRange"));
+        setRange->setGeometry(QRect(800, 210, 119, 23));
+        speedSlider = new QSlider(centralWidget);
+        speedSlider->setObjectName(QStringLiteral("speedSlider"));
+        speedSlider->setGeometry(QRect(800, 290, 160, 22));
+        speedSlider->setOrientation(Qt::Horizontal);
+        spinBox = new QSpinBox(centralWidget);
+        spinBox->setObjectName(QStringLiteral("spinBox"));
+        spinBox->setGeometry(QRect(970, 290, 48, 24));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -114,6 +155,8 @@ public:
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), frameDock);
 
         retranslateUi(MainWindow);
+        QObject::connect(speedSlider, SIGNAL(valueChanged(int)), spinBox, SLOT(setValue(int)));
+        QObject::connect(spinBox, SIGNAL(valueChanged(int)), speedSlider, SLOT(setValue(int)));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
@@ -125,7 +168,10 @@ public:
         xAxisTrans->setText(QApplication::translate("MainWindow", "...", 0));
         rotateTrans->setText(QApplication::translate("MainWindow", "...", 0));
         colorChooser->setText(QApplication::translate("MainWindow", "...", 0));
-        colorChooser_2->setText(QApplication::translate("MainWindow", "New Frame", 0));
+        newScene->setText(QApplication::translate("MainWindow", "New", 0));
+        label->setText(QApplication::translate("MainWindow", "From:", 0));
+        label_2->setText(QApplication::translate("MainWindow", "To:", 0));
+        setRange->setText(QApplication::translate("MainWindow", "Set Range", 0));
     } // retranslateUi
 
 };
