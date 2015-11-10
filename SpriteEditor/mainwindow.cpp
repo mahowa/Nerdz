@@ -30,8 +30,16 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 {
     ui->setupUi(this);
 
+    //Initialize sceneIndex
+    sceneIndex = 0;
+
     //Set up the tiles
     populateScene();
+
+    //Start SceneTimer
+    //Dan: This timer dictatets how fast the upperright window moves through scenes. Am going to add a slider bar widget
+    //to allow user to control this. Can't figure out why the connect using this widget won't work.
+   // sceneTimer->start(1000);
 
     // Set isTransformed to false
     isTransformed = false;
@@ -44,6 +52,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->xAxisTrans, SIGNAL(clicked(bool)), this, SLOT(xAxisTransSlot()));
     connect (ui->yAxisTrans, SIGNAL(clicked(bool)), this, SLOT(yAxisTransSlot()));
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
+
+    //**Dan:For some reason when this connect is uncommented the program fails. I can't figure it out.
+    //Did Same thing in another project and worked fine to use timer to udate upper right hand window.
+    //connect (this->sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
+
+    connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
 
 }
 
@@ -128,7 +142,35 @@ void MainWindow::populateScene()
             ui->smallView1->centerOn(0,0);
 
         }
+
+      //Add current scene to scenesView
+      QGraphicsScene *testScene(spriteEditorScene);
+      scenes.push_back(testScene);
+
     }
+}
+
+//**Dan: Im thinking this will just call populate scene to refresh the main scene. A pointer
+//to the main scene gets put into the vector scenes which are shown on right and left. Also, We will
+//have to implement it so that a scene in thelist of scenes on the left can be clicked and a
+//different type of populate is called that brings that scene up.
+void MainWindow::newScene()
+{
+    populateScene();
+}
+
+//Dan: Can't get this method connected to sceneTimer. It looks exactly how I do it in a seperate project which is working
+//fine. Will work on it more tomorrow.
+void MainWindow::updateScene()
+{
+    ui->scenesView->setScene(scenes[sceneIndex]);
+    if(sceneIndex == scenes.size() - 1)
+    {
+        sceneIndex = 0;
+        return;
+    }
+
+    sceneIndex++;
 }
 
 

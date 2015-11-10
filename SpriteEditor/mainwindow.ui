@@ -46,7 +46,7 @@
      <string>...</string>
     </property>
     <property name="icon">
-     <iconset resource="resources.qrc">
+     <iconset>
       <normaloff>:/yAxisTrans.png</normaloff>:/yAxisTrans.png</iconset>
     </property>
     <property name="iconSize">
@@ -69,7 +69,7 @@
      <string>...</string>
     </property>
     <property name="icon">
-     <iconset resource="resources.qrc">
+     <iconset>
       <normaloff>:/xAxisTrans.png</normaloff>:/xAxisTrans.png</iconset>
     </property>
     <property name="iconSize">
@@ -92,7 +92,7 @@
      <string>...</string>
     </property>
     <property name="icon">
-     <iconset resource="resources.qrc">
+     <iconset>
       <normaloff>:/rotate.png</normaloff>:/rotate.png</iconset>
     </property>
     <property name="iconSize">
@@ -115,7 +115,7 @@
      <string>...</string>
     </property>
     <property name="icon">
-     <iconset resource="resources.qrc">
+     <iconset>
       <normaloff>:/colorPickerIcon.png</normaloff>:/colorPickerIcon.png</iconset>
     </property>
     <property name="iconSize">
@@ -125,6 +125,29 @@
      </size>
     </property>
    </widget>
+   <widget class="QGraphicsView" name="scenesView">
+    <property name="geometry">
+     <rect>
+      <x>800</x>
+      <y>0</y>
+      <width>201</width>
+      <height>161</height>
+     </rect>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="newScene">
+    <property name="geometry">
+     <rect>
+      <x>530</x>
+      <y>660</y>
+      <width>112</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>New</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -132,7 +155,7 @@
      <x>0</x>
      <y>0</y>
      <width>1189</width>
-     <height>22</height>
+     <height>31</height>
     </rect>
    </property>
   </widget>
@@ -185,8 +208,6 @@
   </widget>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
- <resources>
-  <include location="resources.qrc"/>
- </resources>
+ <resources/>
  <connections/>
 </ui>

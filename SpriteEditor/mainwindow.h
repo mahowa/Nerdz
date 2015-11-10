@@ -5,6 +5,8 @@
 #include <QGraphicsScene>
 #include <QLabel>
 #include <QWidget>
+#include <vector>
+#include <QTimer>
 
 
 namespace Ui {
@@ -24,10 +26,16 @@ public slots:
     void xAxisTransSlot();
     void yAxisTransSlot();
     void rotateTransSlot();
+    void newScene();
+    void updateScene();
 
 private:
     Ui::MainWindow *ui;
     void populateScene();
+
+    std::vector<QGraphicsScene*> scenes;
+    QTimer* sceneTimer;
+    int sceneIndex;
 
     QGraphicsScene *spriteEditorScene;
 
