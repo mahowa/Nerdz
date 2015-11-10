@@ -34,9 +34,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     //Initialize sceneIndex
     sceneIndex = 0;
 
-    //Set up the tiles
-    populateScene();
-
     //Start SceneTimer
     sceneTimer = new QTimer(this);
     sceneTimer->start(10);
@@ -54,6 +51,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
     connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
+
+    //Set up the tiles
+    populateScene();
 
 }
 
@@ -140,28 +140,23 @@ void MainWindow::populateScene()
         }
 
       //Add current scene to scenesView
-      QGraphicsScene* currentScene(spriteEditorScene);
+      QGraphicsScene* currentScene = spriteEditorScene;//(spriteEditorScene);
       scenes.push_back(currentScene);
       QRectF bounds = currentScene->itemsBoundingRect();
       ui->scenesView->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
      // ui->scenesView->centerOn(0,0);
 
-      updateScene();
+      //updateScene();
 
     }
 }
 
-//**Dan: Im thinking this will just call populate scene to refresh the main scene. A pointer
-//to the main scene gets put into the vector scenes which are shown on right and left. Also, We will
-//have to implement it so that a scene in thelist of scenes on the left can be clicked and a
-//different type of populate is called that brings that scene up.
 void MainWindow::newScene()
 {
     populateScene();
 }
 
-//Dan: Can't get this method connected to sceneTimer. It looks exactly how I do it in a seperate project which is working
-//fine. Will work on it more tomorrow.
+
 void MainWindow::updateScene()
 {
     ui->scenesView->setScene(scenes[sceneIndex]);
