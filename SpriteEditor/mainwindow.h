@@ -38,7 +38,7 @@ private:
     int sceneIndex;
 
     QGraphicsScene *spriteEditorScene;
-
+    QGraphicsScene* currentScene;
 
     bool isTransformed;
     bool isRotated;

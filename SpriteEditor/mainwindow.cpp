@@ -140,9 +140,9 @@ void MainWindow::populateScene()
         }
 
       //Add current scene to scenesView
-      QGraphicsScene* currentScene = spriteEditorScene;//(spriteEditorScene);
-      scenes.push_back(currentScene);
-      QRectF bounds = currentScene->itemsBoundingRect();
+      //*currentScene = spriteEditorScene;//(spriteEditorScene);
+      scenes.push_back(spriteEditorScene);
+      QRectF bounds = spriteEditorScene->itemsBoundingRect();
       ui->scenesView->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
      // ui->scenesView->centerOn(0,0);
 
