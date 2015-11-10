@@ -20,7 +20,13 @@
 #include <QColor>
 #include <QRgb>
 #include<QGraphicsRectItem>
+<<<<<<< Updated upstream
 #include<QMouseEvent>
+=======
+#include <QPushButton>
+#include <QColorDialog>
+
+>>>>>>> Stashed changes
 
 
 //Constructor
@@ -42,8 +48,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->xAxisTrans, SIGNAL(clicked(bool)), this, SLOT(xAxisTransSlot()));
     connect (ui->yAxisTrans, SIGNAL(clicked(bool)), this, SLOT(yAxisTransSlot()));
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
-
-
 
 }
 
@@ -127,16 +131,7 @@ void MainWindow::populateScene()
 
 void MainWindow::xAxisTransSlot() {
     std::cout << "Printing X-Axis Transformation" << std::endl;
-    //QTransform xAxisTrans(Qt::XAxis);
-    //ui->SpriteEditor->transform();
-   // QTransform transform;
-    //transform.rotate(90, Qt::;
-    //ui->SpriteEditor->setTransform(transform);
-   // ui->SpriteEditor->show();
-    //ui->SpriteEditor->rotate(180);
-   // ui->SpriteEditor->setTransform(QTransform::fromScale(-1,1));
-   // ui->SpriteEditor->setTransform(QTransform::fromTranslate(-1,1));
-   // ui->SpriteEditor->show();
+
     if (isRotated == false)
         ui->SpriteEditor->scale(1,-1);
     else
@@ -164,8 +159,6 @@ void MainWindow::yAxisTransSlot() {
 
 void MainWindow::rotateTransSlot() {
     std::cout << "Printing Rotate Transformation" << std::endl;
-    //ui->SpriteEditor->rotate(90);
-    //ui->SpriteEditor->setTransform(QTransform().translate(0, 0).rotate(90).translate(-0, -0));
 
     if (isTransformed == true)
         ui->SpriteEditor->rotate(-90);

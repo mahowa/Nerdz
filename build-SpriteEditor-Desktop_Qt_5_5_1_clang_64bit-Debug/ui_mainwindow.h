@@ -14,6 +14,7 @@
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
 #include <QtWidgets/QGraphicsView>
+#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -32,6 +33,9 @@ public:
     QToolButton *yAxisTrans;
     QToolButton *xAxisTrans;
     QToolButton *rotateTrans;
+    QToolButton *colorChooser;
+    QWidget *gridLayoutWidget;
+    QGridLayout *colorPickerGridLayout;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -69,6 +73,21 @@ public:
         icon2.addFile(QStringLiteral(":/rotate.png"), QSize(), QIcon::Normal, QIcon::Off);
         rotateTrans->setIcon(icon2);
         rotateTrans->setIconSize(QSize(81, 71));
+        colorChooser = new QToolButton(centralWidget);
+        colorChooser->setObjectName(QStringLiteral("colorChooser"));
+        colorChooser->setGeometry(QRect(760, 220, 81, 71));
+        QIcon icon3;
+        icon3.addFile(QStringLiteral(":/colorPickerIcon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        colorChooser->setIcon(icon3);
+        colorChooser->setIconSize(QSize(81, 71));
+        gridLayoutWidget = new QWidget(centralWidget);
+        gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
+        gridLayoutWidget->setGeometry(QRect(760, 290, 160, 80));
+        colorPickerGridLayout = new QGridLayout(gridLayoutWidget);
+        colorPickerGridLayout->setSpacing(6);
+        colorPickerGridLayout->setContentsMargins(11, 11, 11, 11);
+        colorPickerGridLayout->setObjectName(QStringLiteral("colorPickerGridLayout"));
+        colorPickerGridLayout->setContentsMargins(0, 0, 0, 0);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -92,6 +111,7 @@ public:
         yAxisTrans->setText(QApplication::translate("MainWindow", "...", 0));
         xAxisTrans->setText(QApplication::translate("MainWindow", "...", 0));
         rotateTrans->setText(QApplication::translate("MainWindow", "...", 0));
+        colorChooser->setText(QApplication::translate("MainWindow", "...", 0));
     } // retranslateUi
 
 };

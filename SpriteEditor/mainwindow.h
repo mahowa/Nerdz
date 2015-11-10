@@ -3,10 +3,14 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <QLabel>
+#include <QWidget>
+
 
 namespace Ui {
 class MainWindow;
 }
+
 
 class MainWindow : public QMainWindow
 {
