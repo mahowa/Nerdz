@@ -39,7 +39,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
     //Start SceneTimer
     sceneTimer = new QTimer(this);
-    sceneTimer->start(1000);
+    sceneTimer->start(10);
 
     // Set isTransformed to false
     isTransformed = false;
@@ -144,7 +144,9 @@ void MainWindow::populateScene()
       scenes.push_back(currentScene);
       QRectF bounds = currentScene->itemsBoundingRect();
       ui->scenesView->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
-      ui->scenesView->centerOn(0,0);
+     // ui->scenesView->centerOn(0,0);
+
+      updateScene();
 
     }
 }

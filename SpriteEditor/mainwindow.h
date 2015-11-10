@@ -39,7 +39,7 @@ private:
 
     QGraphicsScene *spriteEditorScene;
 
-    QGraphicsScene *SpriteEditorScene;
+
     bool isTransformed;
     bool isRotated;
 

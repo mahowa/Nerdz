@@ -87,7 +87,10 @@ public:
         colorChooser->setIconSize(QSize(81, 71));
         scenesView = new QGraphicsView(centralWidget);
         scenesView->setObjectName(QStringLiteral("scenesView"));
-        scenesView->setGeometry(QRect(800, 0, 201, 161));
+        scenesView->setGeometry(QRect(800, 0, 200, 200));
+        scenesView->setFrameShape(QFrame::StyledPanel);
+        scenesView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        scenesView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         newScene = new QPushButton(centralWidget);
         newScene->setObjectName(QStringLiteral("newScene"));
         newScene->setGeometry(QRect(530, 660, 112, 34));
