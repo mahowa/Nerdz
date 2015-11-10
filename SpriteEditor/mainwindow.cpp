@@ -23,6 +23,7 @@
 #include<QMouseEvent>
 #include <QPushButton>
 #include <QColorDialog>
+#include <QTimer>
 
 
 //Constructor
@@ -37,9 +38,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     populateScene();
 
     //Start SceneTimer
-    //Dan: This timer dictatets how fast the upperright window moves through scenes. Am going to add a slider bar widget
-    //to allow user to control this. Can't figure out why the connect using this widget won't work.
-   // sceneTimer->start(1000);
+    sceneTimer = new QTimer(this);
+    sceneTimer->start(1000);
 
     // Set isTransformed to false
     isTransformed = false;
@@ -52,11 +52,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->xAxisTrans, SIGNAL(clicked(bool)), this, SLOT(xAxisTransSlot()));
     connect (ui->yAxisTrans, SIGNAL(clicked(bool)), this, SLOT(yAxisTransSlot()));
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
-
-    //**Dan:For some reason when this connect is uncommented the program fails. I can't figure it out.
-    //Did Same thing in another project and worked fine to use timer to udate upper right hand window.
-    //connect (this->sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
-
+    connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
 
 }
@@ -144,8 +140,11 @@ void MainWindow::populateScene()
         }
 
       //Add current scene to scenesView
-      QGraphicsScene *testScene(spriteEditorScene);
-      scenes.push_back(testScene);
+      QGraphicsScene* currentScene(spriteEditorScene);
+      scenes.push_back(currentScene);
+      QRectF bounds = currentScene->itemsBoundingRect();
+      ui->scenesView->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+      ui->scenesView->centerOn(0,0);
 
     }
 }
