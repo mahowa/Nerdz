@@ -21,6 +21,7 @@
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
+#include <QtWidgets/QSlider>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
@@ -45,6 +46,7 @@ public:
     QLabel *label;
     QLabel *label_2;
     QRadioButton *setRange;
+    QSlider *speedSlider;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -118,6 +120,10 @@ public:
         setRange = new QRadioButton(centralWidget);
         setRange->setObjectName(QStringLiteral("setRange"));
         setRange->setGeometry(QRect(800, 210, 119, 23));
+        speedSlider = new QSlider(centralWidget);
+        speedSlider->setObjectName(QStringLiteral("speedSlider"));
+        speedSlider->setGeometry(QRect(800, 290, 160, 22));
+        speedSlider->setOrientation(Qt::Horizontal);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));

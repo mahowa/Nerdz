@@ -28,7 +28,11 @@ public slots:
     void rotateTransSlot();
     void newScene();
     void updateScene();
-    void setRangeToggled();
+    //void on_horizontalSlider_valueChanged();
+
+
+private slots:
+   // void on_horizontalSlider_valueChanged(int value);
 
 private:
     Ui::MainWindow *ui;

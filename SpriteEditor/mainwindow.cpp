@@ -36,7 +36,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
     //Start SceneTimer
     sceneTimer = new QTimer(this);
-    sceneTimer->start(10);
+    sceneTimer->start(100);
 
     // Set isTransformed to false
     isTransformed = false;
@@ -51,6 +51,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
     connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
+    //connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
    // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
 
     //Set up the tiles
@@ -223,3 +224,8 @@ void MainWindow::rotateTransSlot() {
 
 }
 
+
+//void MainWindow::on_horizontalSlider_valueChanged(int value)
+//{
+    //sceneTimer(200 * );
+//}
