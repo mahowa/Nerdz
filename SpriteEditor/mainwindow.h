@@ -3,6 +3,8 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
+#include <QColor>
+
 
 namespace Ui {
 class MainWindow;
@@ -15,19 +17,19 @@ class MainWindow : public QMainWindow
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
+    QColor color;
 
 public slots:
     void xAxisTransSlot();
     void yAxisTransSlot();
     void rotateTransSlot();
 
+
 private:
     Ui::MainWindow *ui;
     void populateScene();
 
     QGraphicsScene *spriteEditorScene;
-
-    QGraphicsScene *SpriteEditorScene;
     bool isTransformed;
     bool isRotated;
 
