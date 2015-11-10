@@ -3,14 +3,15 @@
 #include "tile.h"
 #include <Qt>
 #include <QtWidgets>
+#include "mainwindow.h"
 
-Tile::Tile(const QColor &color, int x, int y, int width)
+Tile::Tile(const QColor &color, int x, int y, int width, MainWindow *main)
 {
     this->x = x;
     this->y = y;
     this->color = color;
     this->squareSide = width;
-    //setZValue((x + y) % 2);
+    this->main = main;
 
     QGraphicsItem::setFlags(ItemIsSelectable);
     QGraphicsItem::setAcceptHoverEvents(true);
@@ -37,8 +38,7 @@ void Tile::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
 void Tile::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    QGraphicsItem::mousePressEvent(event);
-    color = Qt::black;
+    color = main->color;
     update();
 
 }
@@ -55,7 +55,7 @@ void Tile::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
 void Tile::dragEnterEvent(QGraphicsSceneDragDropEvent * event){
     QGraphicsItem::dragEnterEvent(event);
 
-      color = Qt::black;
+      color = main->color;
       update();
 }
 

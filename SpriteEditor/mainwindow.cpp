@@ -21,10 +21,14 @@
 #include <QRgb>
 #include<QGraphicsRectItem>
 #include<QMouseEvent>
+<<<<<<< HEAD
+#include<QColorDialog>
+=======
 #include <QPushButton>
 #include <QColorDialog>
 #include <QTimer>
 
+>>>>>>> origin/master
 
 //Constructor
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow)
@@ -55,8 +59,12 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
    // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
 
 
+<<<<<<< HEAD
+    color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
+=======
     //Set up the tiles
     populateScene();
+>>>>>>> origin/master
 
 }
 
@@ -124,7 +132,7 @@ void MainWindow::populateScene()
             counter++;
 
 
-            QGraphicsItem *item = new Tile(color, j, i, tileWidth);
+            QGraphicsItem *item = new Tile(color, j, i, tileWidth, this);
             //QGraphicsRectItem *item = new QGraphicsRectItem();
             //item->setRect( -tileWidth/2.0, tileHeight/2.0, tileWidth, tileHeight);
             //item->setBrush(color);

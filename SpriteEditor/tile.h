@@ -3,11 +3,12 @@
 
 #include <QColor>
 #include <QGraphicsItem>
+#include "mainwindow.h"
 
 class Tile : public QGraphicsItem
 {
 public:
-    Tile(const QColor &color, int x, int y, int width);
+    Tile(const QColor &color, int x, int y, int width, MainWindow *main);
 
     QRectF boundingRect() const Q_DECL_OVERRIDE;
     //QPainterPath shape() const Q_DECL_OVERRIDE;
@@ -29,6 +30,7 @@ private:
     int squareSide;
     QColor color;
     QVector<QPointF> stuff;
+    MainWindow *main;
 };
 
 

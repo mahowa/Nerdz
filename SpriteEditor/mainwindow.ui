@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Sprite Creator</string>
   </property>
   <widget class="QWidget" name="centralWidget">
    <widget class="QGraphicsView" name="SpriteEditor">
@@ -25,6 +25,9 @@
     </property>
     <property name="cursor" stdset="0">
      <cursorShape>CrossCursor</cursorShape>
+    </property>
+    <property name="frameShape">
+     <enum>QFrame::Box</enum>
     </property>
     <property name="verticalScrollBarPolicy">
      <enum>Qt::ScrollBarAlwaysOff</enum>
@@ -252,6 +255,7 @@
     </property>
    </widget>
   </widget>
+<<<<<<< HEAD
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
@@ -270,6 +274,8 @@
     <bool>false</bool>
    </attribute>
   </widget>
+=======
+>>>>>>> origin/master
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="frameDock">
    <property name="minimumSize">
