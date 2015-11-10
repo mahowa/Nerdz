@@ -125,7 +125,6 @@
      </size>
     </property>
    </widget>
-<<<<<<< Updated upstream
    <widget class="QGraphicsView" name="scenesView">
     <property name="geometry">
      <rect>
@@ -147,25 +146,6 @@
     </property>
     <property name="text">
      <string>New</string>
-=======
-   <widget class="QToolButton" name="colorChooser_2">
-    <property name="geometry">
-     <rect>
-      <x>640</x>
-      <y>280</y>
-      <width>81</width>
-      <height>71</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>New Frame</string>
-    </property>
-    <property name="iconSize">
-     <size>
-      <width>81</width>
-      <height>71</height>
-     </size>
->>>>>>> Stashed changes
     </property>
    </widget>
   </widget>
