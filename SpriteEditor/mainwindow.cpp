@@ -20,13 +20,9 @@
 #include <QColor>
 #include <QRgb>
 #include<QGraphicsRectItem>
-<<<<<<< Updated upstream
 #include<QMouseEvent>
-=======
 #include <QPushButton>
 #include <QColorDialog>
-
->>>>>>> Stashed changes
 
 
 //Constructor
@@ -122,6 +118,14 @@ void MainWindow::populateScene()
 
             item->setPos(QPointF(j, i));
             spriteEditorScene->addItem(item);
+
+
+            // Small view example
+            QGraphicsScene *testScene(spriteEditorScene);
+            ui->smallView1->setScene(testScene);
+            QRectF bounds = testScene->itemsBoundingRect();
+            ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+            ui->smallView1->centerOn(0,0);
 
         }
     }

@@ -13,8 +13,8 @@
 #include <QtWidgets/QAction>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QButtonGroup>
+#include <QtWidgets/QDockWidget>
 #include <QtWidgets/QGraphicsView>
-#include <QtWidgets/QGridLayout>
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
@@ -34,11 +34,12 @@ public:
     QToolButton *xAxisTrans;
     QToolButton *rotateTrans;
     QToolButton *colorChooser;
-    QWidget *gridLayoutWidget;
-    QGridLayout *colorPickerGridLayout;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
+    QDockWidget *frameDock;
+    QWidget *dockWidgetContents_2;
+    QGraphicsView *smallView1;
 
     void setupUi(QMainWindow *MainWindow)
     {
@@ -49,45 +50,38 @@ public:
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         SpriteEditor = new QGraphicsView(centralWidget);
         SpriteEditor->setObjectName(QStringLiteral("SpriteEditor"));
-        SpriteEditor->setGeometry(QRect(120, 10, 640, 640));
+        SpriteEditor->setGeometry(QRect(0, 0, 640, 640));
+        SpriteEditor->viewport()->setProperty("cursor", QVariant(QCursor(Qt::CrossCursor)));
         SpriteEditor->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         SpriteEditor->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         yAxisTrans = new QToolButton(centralWidget);
         yAxisTrans->setObjectName(QStringLiteral("yAxisTrans"));
-        yAxisTrans->setGeometry(QRect(760, 10, 81, 71));
+        yAxisTrans->setGeometry(QRect(640, 0, 81, 71));
         QIcon icon;
         icon.addFile(QStringLiteral(":/yAxisTrans.png"), QSize(), QIcon::Normal, QIcon::Off);
         yAxisTrans->setIcon(icon);
         yAxisTrans->setIconSize(QSize(81, 71));
         xAxisTrans = new QToolButton(centralWidget);
         xAxisTrans->setObjectName(QStringLiteral("xAxisTrans"));
-        xAxisTrans->setGeometry(QRect(760, 80, 81, 71));
+        xAxisTrans->setGeometry(QRect(640, 70, 81, 71));
         QIcon icon1;
         icon1.addFile(QStringLiteral(":/xAxisTrans.png"), QSize(), QIcon::Normal, QIcon::Off);
         xAxisTrans->setIcon(icon1);
         xAxisTrans->setIconSize(QSize(81, 71));
         rotateTrans = new QToolButton(centralWidget);
         rotateTrans->setObjectName(QStringLiteral("rotateTrans"));
-        rotateTrans->setGeometry(QRect(760, 150, 81, 71));
+        rotateTrans->setGeometry(QRect(640, 140, 81, 71));
         QIcon icon2;
         icon2.addFile(QStringLiteral(":/rotate.png"), QSize(), QIcon::Normal, QIcon::Off);
         rotateTrans->setIcon(icon2);
         rotateTrans->setIconSize(QSize(81, 71));
         colorChooser = new QToolButton(centralWidget);
         colorChooser->setObjectName(QStringLiteral("colorChooser"));
-        colorChooser->setGeometry(QRect(760, 220, 81, 71));
+        colorChooser->setGeometry(QRect(640, 210, 81, 71));
         QIcon icon3;
         icon3.addFile(QStringLiteral(":/colorPickerIcon.png"), QSize(), QIcon::Normal, QIcon::Off);
         colorChooser->setIcon(icon3);
         colorChooser->setIconSize(QSize(81, 71));
-        gridLayoutWidget = new QWidget(centralWidget);
-        gridLayoutWidget->setObjectName(QStringLiteral("gridLayoutWidget"));
-        gridLayoutWidget->setGeometry(QRect(760, 290, 160, 80));
-        colorPickerGridLayout = new QGridLayout(gridLayoutWidget);
-        colorPickerGridLayout->setSpacing(6);
-        colorPickerGridLayout->setContentsMargins(11, 11, 11, 11);
-        colorPickerGridLayout->setObjectName(QStringLiteral("colorPickerGridLayout"));
-        colorPickerGridLayout->setContentsMargins(0, 0, 0, 0);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -99,6 +93,20 @@ public:
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
+        frameDock = new QDockWidget(MainWindow);
+        frameDock->setObjectName(QStringLiteral("frameDock"));
+        frameDock->setMinimumSize(QSize(91, 50));
+        frameDock->setFeatures(QDockWidget::NoDockWidgetFeatures);
+        dockWidgetContents_2 = new QWidget();
+        dockWidgetContents_2->setObjectName(QStringLiteral("dockWidgetContents_2"));
+        smallView1 = new QGraphicsView(dockWidgetContents_2);
+        smallView1->setObjectName(QStringLiteral("smallView1"));
+        smallView1->setGeometry(QRect(0, 0, 91, 91));
+        smallView1->setMinimumSize(QSize(50, 50));
+        smallView1->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        smallView1->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        frameDock->setWidget(dockWidgetContents_2);
+        MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), frameDock);
 
         retranslateUi(MainWindow);
 
