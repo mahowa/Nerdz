@@ -228,6 +228,9 @@
       <height>22</height>
      </rect>
     </property>
+    <property name="maximum">
+     <number>30</number>
+    </property>
     <property name="orientation">
      <enum>Qt::Horizontal</enum>
     </property>
@@ -241,6 +244,12 @@
       <height>24</height>
      </rect>
     </property>
+    <property name="minimum">
+     <number>0</number>
+    </property>
+    <property name="maximum">
+     <number>30</number>
+    </property>
    </widget>
   </widget>
   <widget class="QMenuBar" name="menuBar">
@@ -249,7 +258,7 @@
      <x>0</x>
      <y>0</y>
      <width>1189</width>
-     <height>22</height>
+     <height>31</height>
     </rect>
    </property>
   </widget>
@@ -317,8 +326,8 @@
      <y>342</y>
     </hint>
     <hint type="destinationlabel">
-     <x>1083</x>
-     <y>333</y>
+     <x>1109</x>
+     <y>360</y>
     </hint>
    </hints>
   </connection>

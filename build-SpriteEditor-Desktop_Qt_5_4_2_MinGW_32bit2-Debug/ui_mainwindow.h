@@ -47,6 +47,7 @@ public:
     QLabel *label_2;
     QRadioButton *setRange;
     QSlider *speedSlider;
+    QSpinBox *spinBox;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -123,7 +124,13 @@ public:
         speedSlider = new QSlider(centralWidget);
         speedSlider->setObjectName(QStringLiteral("speedSlider"));
         speedSlider->setGeometry(QRect(800, 290, 160, 22));
+        speedSlider->setMaximum(30);
         speedSlider->setOrientation(Qt::Horizontal);
+        spinBox = new QSpinBox(centralWidget);
+        spinBox->setObjectName(QStringLiteral("spinBox"));
+        spinBox->setGeometry(QRect(970, 290, 48, 24));
+        spinBox->setMinimum(0);
+        spinBox->setMaximum(30);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -151,6 +158,8 @@ public:
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), frameDock);
 
         retranslateUi(MainWindow);
+        QObject::connect(speedSlider, SIGNAL(valueChanged(int)), spinBox, SLOT(setValue(int)));
+        QObject::connect(spinBox, SIGNAL(valueChanged(int)), speedSlider, SLOT(setValue(int)));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi

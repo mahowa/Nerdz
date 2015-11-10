@@ -43,7 +43,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
     // Set isRotated to false
     isRotated = false;
-
+    ui->speedSlider->setValue(0);
 
     // Connect signals to slots
     connect (ui->xAxisTrans, SIGNAL(clicked(bool)), this, SLOT(xAxisTransSlot()));
@@ -51,7 +51,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
     connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
-    //connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
+    connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
    // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
 
 
@@ -149,8 +149,6 @@ void MainWindow::populateScene()
       ui->scenesView->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
      // ui->scenesView->centerOn(0,0);
 
-      //updateScene();
-
     }
 }
 
@@ -161,15 +159,6 @@ void MainWindow::newScene()
 
 void MainWindow::updateScene()
 {
-   // if(ui->setRange->isChecked())
-   // {
-       // ui->toBox->setEnabled();
-       // if(ui->fromBui->fromBox->value() > 0 || ui->toBox->value() > 0)
-      //      break breakme;
-   // }
-
-
-
     ui->scenesView->setScene(scenes[sceneIndex]);
     if(sceneIndex == scenes.size() - 1)
     {
@@ -179,7 +168,6 @@ void MainWindow::updateScene()
 
     sceneIndex++;
 }
-
 
 
 void MainWindow::xAxisTransSlot() {
@@ -226,7 +214,15 @@ void MainWindow::rotateTransSlot() {
 }
 
 
-//void MainWindow::on_horizontalSlider_valueChanged(int value)
-//{
-    //sceneTimer(200 * );
-//}
+void MainWindow::on_horizontalSlider_valueChanged()
+{
+    if(ui->speedSlider->value() == 0)
+    {
+        sceneTimer->start(1000000000);
+    }
+    else
+   {
+        int speedValue = ui->speedSlider->value();
+        sceneTimer->start(100/speedValue);
+    }
+}
