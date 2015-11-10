@@ -34,6 +34,7 @@ public:
     QToolButton *xAxisTrans;
     QToolButton *rotateTrans;
     QToolButton *colorChooser;
+    QToolButton *colorChooser_2;
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
@@ -82,6 +83,10 @@ public:
         icon3.addFile(QStringLiteral(":/colorPickerIcon.png"), QSize(), QIcon::Normal, QIcon::Off);
         colorChooser->setIcon(icon3);
         colorChooser->setIconSize(QSize(81, 71));
+        colorChooser_2 = new QToolButton(centralWidget);
+        colorChooser_2->setObjectName(QStringLiteral("colorChooser_2"));
+        colorChooser_2->setGeometry(QRect(640, 280, 81, 71));
+        colorChooser_2->setIconSize(QSize(81, 71));
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
@@ -120,6 +125,7 @@ public:
         xAxisTrans->setText(QApplication::translate("MainWindow", "...", 0));
         rotateTrans->setText(QApplication::translate("MainWindow", "...", 0));
         colorChooser->setText(QApplication::translate("MainWindow", "...", 0));
+        colorChooser_2->setText(QApplication::translate("MainWindow", "New Frame", 0));
     } // retranslateUi
 
 };
