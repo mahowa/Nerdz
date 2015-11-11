@@ -689,6 +689,8 @@ mainwindow.o: ../SpriteEditor/mainwindow.cpp ../SpriteEditor/mainwindow.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
 		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
 		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QColorDialog \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qcolordialog.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
