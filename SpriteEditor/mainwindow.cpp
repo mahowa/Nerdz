@@ -21,14 +21,14 @@
 #include <QRgb>
 #include<QGraphicsRectItem>
 #include<QMouseEvent>
-<<<<<<< HEAD
+
 #include<QColorDialog>
-=======
+
 #include <QPushButton>
 #include <QColorDialog>
 #include <QTimer>
 
->>>>>>> origin/master
+
 
 //Constructor
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow)
@@ -59,13 +59,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
    // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
 
 
-<<<<<<< HEAD
-    color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
-=======
+    //color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
+
     //Set up the tiles
     populateScene();
->>>>>>> origin/master
-
 }
 
 MainWindow::~MainWindow()
@@ -141,12 +138,12 @@ void MainWindow::populateScene()
             spriteEditorScene->addItem(item);
 
 
-            // Small view example
-            QGraphicsScene *testScene(spriteEditorScene);
-            ui->smallView1->setScene(testScene);
-            QRectF bounds = testScene->itemsBoundingRect();
-            ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
-            ui->smallView1->centerOn(0,0);
+//            // Small view example
+//            QGraphicsScene *testScene(spriteEditorScene);
+//            ui->smallView1->setScene(testScene);
+//            QRectF bounds = testScene->itemsBoundingRect();
+//            ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+//            ui->smallView1->centerOn(0,0);
 
         }
 
@@ -191,46 +188,38 @@ void MainWindow::updateScene()
 
 
 void MainWindow::xAxisTransSlot() {
-    std::cout << "Printing X-Axis Transformation" << std::endl;
+    QGraphicsItemGroup *group = spriteEditorScene->createItemGroup(spriteEditorScene->items());
+    QTransform mirror;
 
-    if (isRotated == false)
-        ui->SpriteEditor->scale(1,-1);
+    if (isTransformed == false)
+        group->setTransform(mirror.scale(-1,1));
     else
-        ui->SpriteEditor->scale(-1,1);
-     // ui->SpriteEditor->setMatrix();
+        group->setTransform(mirror.scale(1,-1));
 
-      if (isTransformed == false)
-          isTransformed = true;
-      else
-          isTransformed = false;
+    isTransformed = !isTransformed;
+    spriteEditorScene->destroyItemGroup(group);
 }
 
 void MainWindow::yAxisTransSlot() {
-    std::cout << "Printing Y-Axis Transformation" << std::endl;
-    if (isRotated == false)
-        ui->SpriteEditor->scale(-1,1);
-    else
-        ui->SpriteEditor->scale(1,-1);
+    QGraphicsItemGroup *group = spriteEditorScene->createItemGroup(spriteEditorScene->items());
 
-    if (isTransformed == false)
-        isTransformed = true;
+    QTransform mirror;
+
+    if (isRotated == false)
+        group->setTransform(mirror.scale(-1,1));
     else
-        isTransformed = false;
+        group->setTransform(mirror.scale(1,-1));
+
+
+    spriteEditorScene->destroyItemGroup(group);
 }
 
 void MainWindow::rotateTransSlot() {
-    std::cout << "Printing Rotate Transformation" << std::endl;
+    QGraphicsItemGroup *group = spriteEditorScene->createItemGroup(spriteEditorScene->items());
+    group->setRotation(90);
+    spriteEditorScene->destroyItemGroup(group);
 
-    if (isTransformed == true)
-        ui->SpriteEditor->rotate(-90);
-    else
-        ui->SpriteEditor->rotate(90);
-
-    if (isRotated == false)
-        isRotated = true;
-    else
-        isRotated = false;
-
+    isRotated = !isRotated;
 }
 
 
