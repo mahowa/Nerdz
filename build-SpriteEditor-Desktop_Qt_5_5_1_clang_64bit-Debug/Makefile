@@ -612,6 +612,14 @@ moc_mainwindow.cpp: /Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Header
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/QColor \
+		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers/QTimer \
+		/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../SpriteEditor/mainwindow.h
 	/Applications/QT/5.5/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Applications/QT/5.5/clang_64/mkspecs/macx-clang -I/Users/Brandon/Desktop/Nerdz/SpriteEditor -I/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers -I/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers -I/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers -I. -F/Applications/QT/5.5/clang_64/lib ../SpriteEditor/mainwindow.h -o moc_mainwindow.cpp
 
@@ -640,6 +648,14 @@ main.o: ../SpriteEditor/main.cpp ../SpriteEditor/mainwindow.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/QColor \
+		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers/QTimer \
+		/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QApplication \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qapplication.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o main.o ../SpriteEditor/main.cpp
@@ -649,17 +665,38 @@ mainwindow.o: ../SpriteEditor/mainwindow.cpp ../SpriteEditor/mainwindow.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
-		ui_mainwindow.h \
-		../SpriteEditor/tile.h \
 		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/QColor \
 		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/qcolor.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers/QTimer \
+		/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers/qtimer.h \
+		ui_mainwindow.h \
+		../SpriteEditor/spriteeditorview.h \
+		/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers/QObject \
+		/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers/qobject.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
+		../SpriteEditor/tile.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers/QT \
 		/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers/qnamespace.h \
 		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/QRgb \
 		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/qrgb.h \
-		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
+		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
+		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QFileDialog \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qfiledialog.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QColorDialog \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qcolordialog.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/QPalette \
+		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/qpalette.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../SpriteEditor/mainwindow.cpp
 
 tile.o: ../SpriteEditor/tile.cpp ../SpriteEditor/tile.h \
@@ -667,6 +704,17 @@ tile.o: ../SpriteEditor/tile.cpp ../SpriteEditor/tile.h \
 		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/qcolor.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../SpriteEditor/mainwindow.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers/QTimer \
+		/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers/Qt \
 		/Applications/QT/5.5/clang_64/lib/QtCore.framework/Headers/qnamespace.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QtWidgets \
@@ -689,7 +737,6 @@ tile.o: ../SpriteEditor/tile.cpp ../SpriteEditor/tile.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicslayoutitem.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicslinearlayout.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsproxywidget.h \
-		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicssceneevent.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicstransform.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
@@ -728,7 +775,6 @@ tile.o: ../SpriteEditor/tile.cpp ../SpriteEditor/tile.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qstackedlayout.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qtooltip.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qwhatsthis.h \
-		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qwidgetaction.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qkeyeventtransition.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qmouseeventtransition.h \
@@ -766,10 +812,8 @@ tile.o: ../SpriteEditor/tile.cpp ../SpriteEditor/tile.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qkeysequenceedit.h \
-		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qlcdnumber.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
-		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qmdiarea.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qmdisubwindow.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qmenu.h \

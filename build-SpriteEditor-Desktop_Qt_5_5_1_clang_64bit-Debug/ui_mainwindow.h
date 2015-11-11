@@ -18,6 +18,9 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QMainWindow>
 #include <QtWidgets/QMenuBar>
+#include <QtWidgets/QPushButton>
+#include <QtWidgets/QSlider>
+#include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QToolBar>
 #include <QtWidgets/QToolButton>
@@ -28,14 +31,22 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionSave;
+    QAction *actionOpen;
     QWidget *centralWidget;
     QGraphicsView *SpriteEditor;
     QToolButton *yAxisTrans;
     QToolButton *xAxisTrans;
     QToolButton *rotateTrans;
     QToolButton *colorChooser;
-    QToolButton *colorChooser_2;
+    QGraphicsView *scenesView;
+    QPushButton *newScene;
+    QSlider *speedSlider;
+    QSpinBox *spinBox;
     QMenuBar *menuBar;
+    QWidget *currentColorPallete;
+    QToolButton *SaveFileButton;
+    QToolButton *toolButton_2;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
     QDockWidget *frameDock;
@@ -47,12 +58,17 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(1189, 785);
+        actionSave = new QAction(MainWindow);
+        actionSave->setObjectName(QStringLiteral("actionSave"));
+        actionOpen = new QAction(MainWindow);
+        actionOpen->setObjectName(QStringLiteral("actionOpen"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         SpriteEditor = new QGraphicsView(centralWidget);
         SpriteEditor->setObjectName(QStringLiteral("SpriteEditor"));
         SpriteEditor->setGeometry(QRect(0, 0, 640, 640));
         SpriteEditor->viewport()->setProperty("cursor", QVariant(QCursor(Qt::CrossCursor)));
+        SpriteEditor->setFrameShape(QFrame::Box);
         SpriteEditor->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         SpriteEditor->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         yAxisTrans = new QToolButton(centralWidget);
@@ -78,19 +94,53 @@ public:
         rotateTrans->setIconSize(QSize(81, 71));
         colorChooser = new QToolButton(centralWidget);
         colorChooser->setObjectName(QStringLiteral("colorChooser"));
-        colorChooser->setGeometry(QRect(640, 210, 81, 71));
+        colorChooser->setGeometry(QRect(640, 210, 41, 51));
+        colorChooser->setAutoFillBackground(false);
         QIcon icon3;
         icon3.addFile(QStringLiteral(":/colorPickerIcon.png"), QSize(), QIcon::Normal, QIcon::Off);
         colorChooser->setIcon(icon3);
         colorChooser->setIconSize(QSize(81, 71));
-        colorChooser_2 = new QToolButton(centralWidget);
-        colorChooser_2->setObjectName(QStringLiteral("colorChooser_2"));
-        colorChooser_2->setGeometry(QRect(640, 280, 81, 71));
-        colorChooser_2->setIconSize(QSize(81, 71));
+        scenesView = new QGraphicsView(centralWidget);
+        scenesView->setObjectName(QStringLiteral("scenesView"));
+        scenesView->setGeometry(QRect(800, 0, 200, 200));
+        scenesView->setFrameShape(QFrame::StyledPanel);
+        scenesView->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        scenesView->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
+        newScene = new QPushButton(centralWidget);
+        newScene->setObjectName(QStringLiteral("newScene"));
+        newScene->setGeometry(QRect(530, 660, 112, 34));
+        speedSlider = new QSlider(centralWidget);
+        speedSlider->setObjectName(QStringLiteral("speedSlider"));
+        speedSlider->setGeometry(QRect(800, 220, 160, 22));
+        speedSlider->setMaximum(30);
+        speedSlider->setOrientation(Qt::Horizontal);
+        spinBox = new QSpinBox(centralWidget);
+        spinBox->setObjectName(QStringLiteral("spinBox"));
+        spinBox->setGeometry(QRect(970, 220, 48, 24));
+        spinBox->setMinimum(0);
+        spinBox->setMaximum(30);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1189, 22));
+        menuBar->setGeometry(QRect(0, 0, 1189, 31));
+        currentColorPallete = new QWidget(menuBar);
+        currentColorPallete->setObjectName(QStringLiteral("currentColorPallete"));
+        currentColorPallete->setGeometry(QRect(690, 220, 31, 31));
+        currentColorPallete->setAutoFillBackground(true);
+        SaveFileButton = new QToolButton(menuBar);
+        SaveFileButton->setObjectName(QStringLiteral("SaveFileButton"));
+        SaveFileButton->setGeometry(QRect(640, 260, 41, 41));
+        QIcon icon4;
+        icon4.addFile(QStringLiteral(":/save icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        SaveFileButton->setIcon(icon4);
+        SaveFileButton->setIconSize(QSize(71, 71));
+        toolButton_2 = new QToolButton(menuBar);
+        toolButton_2->setObjectName(QStringLiteral("toolButton_2"));
+        toolButton_2->setGeometry(QRect(680, 260, 41, 41));
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/open file.png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolButton_2->setIcon(icon5);
+        toolButton_2->setIconSize(QSize(71, 71));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -114,18 +164,24 @@ public:
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), frameDock);
 
         retranslateUi(MainWindow);
+        QObject::connect(speedSlider, SIGNAL(valueChanged(int)), spinBox, SLOT(setValue(int)));
+        QObject::connect(spinBox, SIGNAL(valueChanged(int)), speedSlider, SLOT(setValue(int)));
 
         QMetaObject::connectSlotsByName(MainWindow);
     } // setupUi
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Sprite Creator", 0));
+        actionSave->setText(QApplication::translate("MainWindow", "Save", 0));
+        actionOpen->setText(QApplication::translate("MainWindow", "Open", 0));
         yAxisTrans->setText(QApplication::translate("MainWindow", "...", 0));
         xAxisTrans->setText(QApplication::translate("MainWindow", "...", 0));
         rotateTrans->setText(QApplication::translate("MainWindow", "...", 0));
         colorChooser->setText(QApplication::translate("MainWindow", "...", 0));
-        colorChooser_2->setText(QApplication::translate("MainWindow", "New Frame", 0));
+        newScene->setText(QApplication::translate("MainWindow", "New", 0));
+        SaveFileButton->setText(QApplication::translate("MainWindow", "...", 0));
+        toolButton_2->setText(QApplication::translate("MainWindow", "...", 0));
     } // retranslateUi
 
 };
