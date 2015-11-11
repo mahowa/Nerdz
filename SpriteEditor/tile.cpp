@@ -9,7 +9,7 @@ Tile::Tile(const QColor &color, int x, int y, int width, MainWindow *main)
 {
     this->x = x;
     this->y = y;
-    this->color = color;
+    this->tcolor = color;
     this->squareSide = width;
     this->main = main;
 
@@ -29,8 +29,8 @@ void Tile::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 {
     QRectF rect = boundingRect();
 
-    QPen pen(color);
-    painter->setBrush(color);
+    QPen pen(tcolor);
+    painter->setBrush(tcolor);
     painter->setPen(Qt::black);
     painter->drawRect(rect);
 
@@ -38,10 +38,19 @@ void Tile::paint(QPainter *painter, const QStyleOptionGraphicsItem *option, QWid
 
 void Tile::mousePressEvent(QGraphicsSceneMouseEvent *event)
 {
-    color = main->color;
+
+    tcolor = main->color;
     update();
 
 }
+
+void Tile::mouseClickReleaseEvent(QGraphicsSceneMouseEvent *event) {
+
+    QGraphicsItem::mouseReleaseEvent(event);
+    tcolor = main->color;
+    update();
+}
+
 void Tile::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
     QGraphicsItem::mouseMoveEvent(event);
 
@@ -55,18 +64,23 @@ void Tile::mouseMoveEvent(QGraphicsSceneMouseEvent *event){
 void Tile::dragEnterEvent(QGraphicsSceneDragDropEvent * event){
     QGraphicsItem::dragEnterEvent(event);
 
-      color = main->color;
+      tcolor = main->color;
       update();
 }
 
 void Tile::hoverEnterEvent(QGraphicsSceneHoverEvent * event){
-    color = color.lighter(50);
+
+    int curAlph = tcolor.alpha();
+    curAlph -= 75;
+    tcolor.setAlpha(curAlph);
     update();
 
 }
 void Tile::hoverLeaveEvent(QGraphicsSceneHoverEvent * event){
 
-    color = color.darker(50);
+    int curAlph = tcolor.alpha();
+    curAlph += 75;
+    tcolor.setAlpha(curAlph);
     update();
 
 }

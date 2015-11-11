@@ -30,10 +30,6 @@
 #include <QPalette>
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> WilldensBranch
 
 //Constructor
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow)
@@ -52,12 +48,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
     // Set isRotated to false
     isRotated = false;
-<<<<<<< HEAD
-
-=======
     ui->speedSlider->setValue(0);
     ui->currentColorPallete->setPalette(color);
->>>>>>> WilldensBranch
 
     // Connect signals to slots
     connect (ui->xAxisTrans, SIGNAL(clicked(bool)), this, SLOT(xAxisTransSlot()));
@@ -65,17 +57,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
     connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
-<<<<<<< HEAD
-    //connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
-   // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
-
-
-    //color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
-=======
     connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
+a
 
-
->>>>>>> WilldensBranch
 
     //Set up the tiles
     populateScene();
@@ -154,12 +138,12 @@ void MainWindow::populateScene()
             spriteEditorScene->addItem(item);
 
 
-//            // Small view example
-//            QGraphicsScene *testScene(spriteEditorScene);
-//            ui->smallView1->setScene(testScene);
-//            QRectF bounds = testScene->itemsBoundingRect();
-//            ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
-//            ui->smallView1->centerOn(0,0);
+            // Small view example
+            QGraphicsScene *testScene(spriteEditorScene);
+            ui->smallView1->setScene(testScene);
+            QRectF bounds = testScene->itemsBoundingRect();
+            ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+            ui->smallView1->centerOn(0,0);
 
         }
 
@@ -169,8 +153,6 @@ void MainWindow::populateScene()
       QRectF bounds = spriteEditorScene->itemsBoundingRect();
       ui->scenesView->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
      // ui->scenesView->centerOn(0,0);
-
-      //updateScene();
 
     }
 }
@@ -182,15 +164,6 @@ void MainWindow::newScene()
 
 void MainWindow::updateScene()
 {
-   // if(ui->setRange->isChecked())
-   // {
-       // ui->toBox->setEnabled();
-       // if(ui->fromBui->fromBox->value() > 0 || ui->toBox->value() > 0)
-      //      break breakme;
-   // }
-
-
-
     ui->scenesView->setScene(scenes[sceneIndex]);
     if(sceneIndex == scenes.size() - 1)
     {
@@ -202,49 +175,50 @@ void MainWindow::updateScene()
 }
 
 
-
 void MainWindow::xAxisTransSlot() {
-    QGraphicsItemGroup *group = spriteEditorScene->createItemGroup(spriteEditorScene->items());
-    QTransform mirror;
+    std::cout << "Printing X-Axis Transformation" << std::endl;
 
-    if (isTransformed == false)
-        group->setTransform(mirror.scale(1,-1));
+    if (isRotated == false)
+        ui->SpriteEditor->scale(1,-1);
     else
-        group->setTransform(mirror.scale(1,-1));
+        ui->SpriteEditor->scale(-1,1);
+     // ui->SpriteEditor->setMatrix();
 
-    isTransformed = !isTransformed;
-    spriteEditorScene->destroyItemGroup(group);
+      if (isTransformed == false)
+          isTransformed = true;
+      else
+          isTransformed = false;
 }
 
 void MainWindow::yAxisTransSlot() {
-    QGraphicsItemGroup *group = spriteEditorScene->createItemGroup(spriteEditorScene->items());
-
-    QTransform mirror;
-
+    std::cout << "Printing Y-Axis Transformation" << std::endl;
     if (isRotated == false)
-        group->setTransform(mirror.scale(-1,1));
+        ui->SpriteEditor->scale(-1,1);
     else
-        group->setTransform(mirror.scale(-1,1));
+        ui->SpriteEditor->scale(1,-1);
 
-
-    spriteEditorScene->destroyItemGroup(group);
+    if (isTransformed == false)
+        isTransformed = true;
+    else
+        isTransformed = false;
 }
 
 void MainWindow::rotateTransSlot() {
-    QGraphicsItemGroup *group = spriteEditorScene->createItemGroup(spriteEditorScene->items());
-    group->setRotation(90);
-    spriteEditorScene->destroyItemGroup(group);
+    std::cout << "Printing Rotate Transformation" << std::endl;
 
-    isRotated = !isRotated;
+    if (isTransformed == true)
+        ui->SpriteEditor->rotate(-90);
+    else
+        ui->SpriteEditor->rotate(90);
+
+    if (isRotated == false)
+        isRotated = true;
+    else
+        isRotated = false;
+
 }
 
 
-<<<<<<< HEAD
-//void MainWindow::on_horizontalSlider_valueChanged(int value)
-//{
-    //sceneTimer(200 * );
-//}
-=======
 void MainWindow::on_horizontalSlider_valueChanged()
 {
     if(ui->speedSlider->value() == 0)
@@ -267,4 +241,3 @@ void MainWindow::on_colorChooser_clicked()
 
     //emit colorChanged(mColor);
 }
->>>>>>> WilldensBranch

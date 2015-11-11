@@ -4,5 +4,7 @@
         <file>yAxisTrans.png</file>
         <file>rotate.png</file>
         <file>colorPickerIcon.png</file>
+        <file>save icon.png</file>
+        <file>open file.png</file>
     </qresource>
 </RCC>
