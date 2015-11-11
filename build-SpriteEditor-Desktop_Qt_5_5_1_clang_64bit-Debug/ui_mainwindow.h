@@ -45,7 +45,8 @@ public:
     QSpinBox *spinBox;
     QMenuBar *menuBar;
     QWidget *currentColorPallete;
-    QToolButton *toolButton;
+    QToolButton *SaveFileButton;
+    QToolButton *toolButton_2;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
     QDockWidget *frameDock;
@@ -126,13 +127,20 @@ public:
         currentColorPallete->setObjectName(QStringLiteral("currentColorPallete"));
         currentColorPallete->setGeometry(QRect(690, 220, 31, 31));
         currentColorPallete->setAutoFillBackground(true);
-        toolButton = new QToolButton(menuBar);
-        toolButton->setObjectName(QStringLiteral("toolButton"));
-        toolButton->setGeometry(QRect(650, 271, 61, 61));
+        SaveFileButton = new QToolButton(menuBar);
+        SaveFileButton->setObjectName(QStringLiteral("SaveFileButton"));
+        SaveFileButton->setGeometry(QRect(640, 260, 41, 41));
         QIcon icon4;
         icon4.addFile(QStringLiteral(":/save icon.png"), QSize(), QIcon::Normal, QIcon::Off);
-        toolButton->setIcon(icon4);
-        toolButton->setIconSize(QSize(71, 71));
+        SaveFileButton->setIcon(icon4);
+        SaveFileButton->setIconSize(QSize(71, 71));
+        toolButton_2 = new QToolButton(menuBar);
+        toolButton_2->setObjectName(QStringLiteral("toolButton_2"));
+        toolButton_2->setGeometry(QRect(680, 260, 41, 41));
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/open file.png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolButton_2->setIcon(icon5);
+        toolButton_2->setIconSize(QSize(71, 71));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -172,7 +180,8 @@ public:
         rotateTrans->setText(QApplication::translate("MainWindow", "...", 0));
         colorChooser->setText(QApplication::translate("MainWindow", "...", 0));
         newScene->setText(QApplication::translate("MainWindow", "New", 0));
-        toolButton->setText(QApplication::translate("MainWindow", "...", 0));
+        SaveFileButton->setText(QApplication::translate("MainWindow", "...", 0));
+        toolButton_2->setText(QApplication::translate("MainWindow", "...", 0));
     } // retranslateUi
 
 };
