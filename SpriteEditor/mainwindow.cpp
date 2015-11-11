@@ -241,3 +241,13 @@ void MainWindow::on_colorChooser_clicked()
 
     //emit colorChanged(mColor);
 }
+
+void MainWindow::on_SaveFileButton_clicked()
+{
+
+}
+
+void MainWindow::on_toolButton_2_clicked()
+{
+
+}
