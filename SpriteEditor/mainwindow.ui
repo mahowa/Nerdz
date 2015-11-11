@@ -255,7 +255,6 @@
     </property>
    </widget>
   </widget>
-<<<<<<< HEAD
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
     <rect>
@@ -274,8 +273,6 @@
     <bool>false</bool>
    </attribute>
   </widget>
-=======
->>>>>>> origin/master
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="frameDock">
    <property name="minimumSize">
