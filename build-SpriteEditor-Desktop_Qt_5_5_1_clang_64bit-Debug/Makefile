@@ -692,7 +692,9 @@ mainwindow.o: ../SpriteEditor/mainwindow.cpp ../SpriteEditor/mainwindow.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QColorDialog \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qcolordialog.h \
 		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
-		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h
+		/Applications/QT/5.5/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
+		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/QPalette \
+		/Applications/QT/5.5/clang_64/lib/QtGui.framework/Headers/qpalette.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../SpriteEditor/mainwindow.cpp
 
 tile.o: ../SpriteEditor/tile.cpp ../SpriteEditor/tile.h \

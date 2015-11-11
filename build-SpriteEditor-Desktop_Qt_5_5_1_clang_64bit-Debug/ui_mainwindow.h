@@ -16,17 +16,13 @@
 #include <QtWidgets/QDockWidget>
 #include <QtWidgets/QGraphicsView>
 #include <QtWidgets/QHeaderView>
-#include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
-<<<<<<< HEAD
 #include <QtWidgets/QMenuBar>
-=======
->>>>>>> Transformation-Branch
 #include <QtWidgets/QPushButton>
-#include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
+#include <QtWidgets/QToolBar>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
 
@@ -35,6 +31,8 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionSave;
+    QAction *actionOpen;
     QWidget *centralWidget;
     QGraphicsView *SpriteEditor;
     QToolButton *yAxisTrans;
@@ -43,18 +41,12 @@ public:
     QToolButton *colorChooser;
     QGraphicsView *scenesView;
     QPushButton *newScene;
-    QSpinBox *fromBox;
-    QSpinBox *toBox;
-    QLabel *label;
-    QLabel *label_2;
-    QRadioButton *setRange;
     QSlider *speedSlider;
     QSpinBox *spinBox;
-<<<<<<< HEAD
     QMenuBar *menuBar;
+    QWidget *currentColorPallete;
+    QToolButton *toolButton;
     QToolBar *mainToolBar;
-=======
->>>>>>> Transformation-Branch
     QStatusBar *statusBar;
     QDockWidget *frameDock;
     QWidget *dockWidgetContents_2;
@@ -65,6 +57,10 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(1189, 785);
+        actionSave = new QAction(MainWindow);
+        actionSave->setObjectName(QStringLiteral("actionSave"));
+        actionOpen = new QAction(MainWindow);
+        actionOpen->setObjectName(QStringLiteral("actionOpen"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         SpriteEditor = new QGraphicsView(centralWidget);
@@ -97,7 +93,8 @@ public:
         rotateTrans->setIconSize(QSize(81, 71));
         colorChooser = new QToolButton(centralWidget);
         colorChooser->setObjectName(QStringLiteral("colorChooser"));
-        colorChooser->setGeometry(QRect(640, 210, 81, 71));
+        colorChooser->setGeometry(QRect(640, 210, 41, 51));
+        colorChooser->setAutoFillBackground(false);
         QIcon icon3;
         icon3.addFile(QStringLiteral(":/colorPickerIcon.png"), QSize(), QIcon::Normal, QIcon::Off);
         colorChooser->setIcon(icon3);
@@ -111,47 +108,35 @@ public:
         newScene = new QPushButton(centralWidget);
         newScene->setObjectName(QStringLiteral("newScene"));
         newScene->setGeometry(QRect(530, 660, 112, 34));
-        fromBox = new QSpinBox(centralWidget);
-        fromBox->setObjectName(QStringLiteral("fromBox"));
-        fromBox->setGeometry(QRect(860, 240, 45, 25));
-        toBox = new QSpinBox(centralWidget);
-        toBox->setObjectName(QStringLiteral("toBox"));
-        toBox->setEnabled(false);
-        toBox->setGeometry(QRect(950, 240, 45, 25));
-        label = new QLabel(centralWidget);
-        label->setObjectName(QStringLiteral("label"));
-        label->setGeometry(QRect(810, 240, 68, 19));
-        label_2 = new QLabel(centralWidget);
-        label_2->setObjectName(QStringLiteral("label_2"));
-        label_2->setGeometry(QRect(920, 240, 68, 19));
-        setRange = new QRadioButton(centralWidget);
-        setRange->setObjectName(QStringLiteral("setRange"));
-        setRange->setGeometry(QRect(800, 210, 119, 23));
         speedSlider = new QSlider(centralWidget);
         speedSlider->setObjectName(QStringLiteral("speedSlider"));
-        speedSlider->setGeometry(QRect(800, 290, 160, 22));
-<<<<<<< HEAD
+        speedSlider->setGeometry(QRect(800, 220, 160, 22));
         speedSlider->setMaximum(30);
-=======
->>>>>>> Transformation-Branch
         speedSlider->setOrientation(Qt::Horizontal);
         spinBox = new QSpinBox(centralWidget);
         spinBox->setObjectName(QStringLiteral("spinBox"));
-        spinBox->setGeometry(QRect(970, 290, 48, 24));
-<<<<<<< HEAD
+        spinBox->setGeometry(QRect(970, 220, 48, 24));
         spinBox->setMinimum(0);
         spinBox->setMaximum(30);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1189, 31));
+        currentColorPallete = new QWidget(menuBar);
+        currentColorPallete->setObjectName(QStringLiteral("currentColorPallete"));
+        currentColorPallete->setGeometry(QRect(690, 220, 31, 31));
+        currentColorPallete->setAutoFillBackground(true);
+        toolButton = new QToolButton(menuBar);
+        toolButton->setObjectName(QStringLiteral("toolButton"));
+        toolButton->setGeometry(QRect(650, 271, 61, 61));
+        QIcon icon4;
+        icon4.addFile(QStringLiteral(":/save icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolButton->setIcon(icon4);
+        toolButton->setIconSize(QSize(71, 71));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
-=======
-        MainWindow->setCentralWidget(centralWidget);
->>>>>>> Transformation-Branch
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
@@ -180,14 +165,14 @@ public:
     void retranslateUi(QMainWindow *MainWindow)
     {
         MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Sprite Creator", 0));
+        actionSave->setText(QApplication::translate("MainWindow", "Save", 0));
+        actionOpen->setText(QApplication::translate("MainWindow", "Open", 0));
         yAxisTrans->setText(QApplication::translate("MainWindow", "...", 0));
         xAxisTrans->setText(QApplication::translate("MainWindow", "...", 0));
         rotateTrans->setText(QApplication::translate("MainWindow", "...", 0));
         colorChooser->setText(QApplication::translate("MainWindow", "...", 0));
         newScene->setText(QApplication::translate("MainWindow", "New", 0));
-        label->setText(QApplication::translate("MainWindow", "From:", 0));
-        label_2->setText(QApplication::translate("MainWindow", "To:", 0));
-        setRange->setText(QApplication::translate("MainWindow", "Set Range", 0));
+        toolButton->setText(QApplication::translate("MainWindow", "...", 0));
     } // retranslateUi
 
 };

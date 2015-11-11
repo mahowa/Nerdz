@@ -30,11 +30,6 @@
 #include <QPalette>
 
 
-<<<<<<< HEAD
-
-=======
->>>>>>> WilldensBranch
-
 //Constructor
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow)
 {
@@ -52,12 +47,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
     // Set isRotated to false
     isRotated = false;
-<<<<<<< HEAD
 
-=======
     ui->speedSlider->setValue(0);
     ui->currentColorPallete->setPalette(color);
->>>>>>> WilldensBranch
 
     // Connect signals to slots
     connect (ui->xAxisTrans, SIGNAL(clicked(bool)), this, SLOT(xAxisTransSlot()));
@@ -65,17 +57,14 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
     connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
-<<<<<<< HEAD
     //connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
    // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
 
 
     //color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
-=======
+
     connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
 
-
->>>>>>> WilldensBranch
 
     //Set up the tiles
     populateScene();
@@ -239,12 +228,11 @@ void MainWindow::rotateTransSlot() {
 }
 
 
-<<<<<<< HEAD
 //void MainWindow::on_horizontalSlider_valueChanged(int value)
 //{
     //sceneTimer(200 * );
 //}
-=======
+
 void MainWindow::on_horizontalSlider_valueChanged()
 {
     if(ui->speedSlider->value() == 0)
@@ -267,4 +255,3 @@ void MainWindow::on_colorChooser_clicked()
 
     //emit colorChanged(mColor);
 }
->>>>>>> WilldensBranch

@@ -195,7 +195,6 @@
      <number>30</number>
     </property>
    </widget>
-<<<<<<< HEAD
   </widget>
   <widget class="QMenuBar" name="menuBar">
    <property name="geometry">
@@ -206,7 +205,6 @@
      <height>31</height>
     </rect>
    </property>
-=======
    <widget class="QWidget" name="currentColorPallete" native="true">
     <property name="geometry">
      <rect>
@@ -243,7 +241,6 @@
      </size>
     </property>
    </widget>
->>>>>>> WilldensBranch
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
