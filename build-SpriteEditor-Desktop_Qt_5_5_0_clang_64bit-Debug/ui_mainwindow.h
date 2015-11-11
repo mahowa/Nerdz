@@ -18,6 +18,7 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
+#include <QtWidgets/QMenu>
 #include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
@@ -33,6 +34,8 @@ QT_BEGIN_NAMESPACE
 class Ui_MainWindow
 {
 public:
+    QAction *actionSave;
+    QAction *actionOpen;
     QWidget *centralWidget;
     QGraphicsView *SpriteEditor;
     QToolButton *yAxisTrans;
@@ -48,7 +51,9 @@ public:
     QRadioButton *setRange;
     QSlider *speedSlider;
     QSpinBox *spinBox;
+    QWidget *currentColorPallete;
     QMenuBar *menuBar;
+    QMenu *menuFile;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
     QDockWidget *frameDock;
@@ -60,12 +65,17 @@ public:
         if (MainWindow->objectName().isEmpty())
             MainWindow->setObjectName(QStringLiteral("MainWindow"));
         MainWindow->resize(1189, 785);
+        actionSave = new QAction(MainWindow);
+        actionSave->setObjectName(QStringLiteral("actionSave"));
+        actionOpen = new QAction(MainWindow);
+        actionOpen->setObjectName(QStringLiteral("actionOpen"));
         centralWidget = new QWidget(MainWindow);
         centralWidget->setObjectName(QStringLiteral("centralWidget"));
         SpriteEditor = new QGraphicsView(centralWidget);
         SpriteEditor->setObjectName(QStringLiteral("SpriteEditor"));
         SpriteEditor->setGeometry(QRect(0, 0, 640, 640));
         SpriteEditor->viewport()->setProperty("cursor", QVariant(QCursor(Qt::CrossCursor)));
+        SpriteEditor->setFrameShape(QFrame::Box);
         SpriteEditor->setVerticalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         SpriteEditor->setHorizontalScrollBarPolicy(Qt::ScrollBarAlwaysOff);
         yAxisTrans = new QToolButton(centralWidget);
@@ -91,7 +101,8 @@ public:
         rotateTrans->setIconSize(QSize(81, 71));
         colorChooser = new QToolButton(centralWidget);
         colorChooser->setObjectName(QStringLiteral("colorChooser"));
-        colorChooser->setGeometry(QRect(640, 210, 81, 71));
+        colorChooser->setGeometry(QRect(640, 210, 41, 51));
+        colorChooser->setAutoFillBackground(false);
         QIcon icon3;
         icon3.addFile(QStringLiteral(":/colorPickerIcon.png"), QSize(), QIcon::Normal, QIcon::Off);
         colorChooser->setIcon(icon3);
@@ -124,14 +135,23 @@ public:
         speedSlider = new QSlider(centralWidget);
         speedSlider->setObjectName(QStringLiteral("speedSlider"));
         speedSlider->setGeometry(QRect(800, 290, 160, 22));
+        speedSlider->setMaximum(30);
         speedSlider->setOrientation(Qt::Horizontal);
         spinBox = new QSpinBox(centralWidget);
         spinBox->setObjectName(QStringLiteral("spinBox"));
         spinBox->setGeometry(QRect(970, 290, 48, 24));
+        spinBox->setMinimum(0);
+        spinBox->setMaximum(30);
+        currentColorPallete = new QWidget(centralWidget);
+        currentColorPallete->setObjectName(QStringLiteral("currentColorPallete"));
+        currentColorPallete->setGeometry(QRect(690, 220, 31, 31));
+        currentColorPallete->setAutoFillBackground(true);
         MainWindow->setCentralWidget(centralWidget);
         menuBar = new QMenuBar(MainWindow);
         menuBar->setObjectName(QStringLiteral("menuBar"));
         menuBar->setGeometry(QRect(0, 0, 1189, 22));
+        menuFile = new QMenu(menuBar);
+        menuFile->setObjectName(QStringLiteral("menuFile"));
         MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
@@ -154,6 +174,10 @@ public:
         frameDock->setWidget(dockWidgetContents_2);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), frameDock);
 
+        menuBar->addAction(menuFile->menuAction());
+        menuFile->addAction(actionSave);
+        menuFile->addAction(actionOpen);
+
         retranslateUi(MainWindow);
         QObject::connect(speedSlider, SIGNAL(valueChanged(int)), spinBox, SLOT(setValue(int)));
         QObject::connect(spinBox, SIGNAL(valueChanged(int)), speedSlider, SLOT(setValue(int)));
@@ -163,7 +187,9 @@ public:
 
     void retranslateUi(QMainWindow *MainWindow)
     {
-        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "MainWindow", 0));
+        MainWindow->setWindowTitle(QApplication::translate("MainWindow", "Sprite Creator", 0));
+        actionSave->setText(QApplication::translate("MainWindow", "Save", 0));
+        actionOpen->setText(QApplication::translate("MainWindow", "Open", 0));
         yAxisTrans->setText(QApplication::translate("MainWindow", "...", 0));
         xAxisTrans->setText(QApplication::translate("MainWindow", "...", 0));
         rotateTrans->setText(QApplication::translate("MainWindow", "...", 0));
@@ -172,6 +198,7 @@ public:
         label->setText(QApplication::translate("MainWindow", "From:", 0));
         label_2->setText(QApplication::translate("MainWindow", "To:", 0));
         setRange->setText(QApplication::translate("MainWindow", "Set Range", 0));
+        menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
     } // retranslateUi
 
 };

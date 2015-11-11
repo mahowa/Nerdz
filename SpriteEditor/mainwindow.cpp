@@ -21,14 +21,15 @@
 #include <QRgb>
 #include<QGraphicsRectItem>
 #include<QMouseEvent>
-<<<<<<< HEAD
+
 #include<QColorDialog>
-=======
+
 #include <QPushButton>
 #include <QColorDialog>
 #include <QTimer>
+#include <QPalette>
 
->>>>>>> origin/master
+
 
 //Constructor
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow)
@@ -48,6 +49,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     // Set isRotated to false
     isRotated = false;
     ui->speedSlider->setValue(0);
+    ui->currentColorPallete->setPalette(color);
 
     // Connect signals to slots
     connect (ui->xAxisTrans, SIGNAL(clicked(bool)), this, SLOT(xAxisTransSlot()));
@@ -56,16 +58,11 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
     connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
-   // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
+    // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
 
 
-<<<<<<< HEAD
-    color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
-=======
     //Set up the tiles
     populateScene();
->>>>>>> origin/master
-
 }
 
 MainWindow::~MainWindow()
@@ -126,7 +123,7 @@ void MainWindow::populateScene()
 
             QColor color;
             if(isSwap)
-                color= QColor(169, 169, 169);
+                color = QColor(169, 169, 169);
             else
                 color = QColor(211, 211, 211);
             counter++;
@@ -233,4 +230,14 @@ void MainWindow::on_horizontalSlider_valueChanged()
         int speedValue = ui->speedSlider->value();
         sceneTimer->start(100/speedValue);
     }
+}
+
+void MainWindow::on_colorChooser_clicked()
+{
+    color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
+    QPalette pal = ui->currentColorPallete->palette();
+    pal.setColor(QPalette::Window, color);
+    ui->currentColorPallete->setPalette(pal);
+
+    //emit colorChanged(mColor);
 }

@@ -110,9 +110,12 @@
      <rect>
       <x>640</x>
       <y>210</y>
-      <width>81</width>
-      <height>71</height>
+      <width>41</width>
+      <height>51</height>
      </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>false</bool>
     </property>
     <property name="text">
      <string>...</string>
@@ -254,17 +257,42 @@
      <number>30</number>
     </property>
    </widget>
-  </widget>
-<<<<<<< HEAD
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1189</width>
-     <height>31</height>
-    </rect>
-   </property>
+   <widget class="QWidget" name="currentColorPallete" native="true">
+    <property name="geometry">
+     <rect>
+      <x>690</x>
+      <y>220</y>
+      <width>31</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="autoFillBackground">
+     <bool>true</bool>
+    </property>
+   </widget>
+   <widget class="QToolButton" name="toolButton">
+    <property name="geometry">
+     <rect>
+      <x>650</x>
+      <y>271</y>
+      <width>61</width>
+      <height>61</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>...</string>
+    </property>
+    <property name="icon">
+     <iconset resource="resources.qrc">
+      <normaloff>:/save icon.png</normaloff>:/save icon.png</iconset>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>71</width>
+      <height>71</height>
+     </size>
+    </property>
+   </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
@@ -274,8 +302,6 @@
     <bool>false</bool>
    </attribute>
   </widget>
-=======
->>>>>>> origin/master
   <widget class="QStatusBar" name="statusBar"/>
   <widget class="QDockWidget" name="frameDock">
    <property name="minimumSize">
@@ -315,6 +341,16 @@
     </widget>
    </widget>
   </widget>
+  <action name="actionSave">
+   <property name="text">
+    <string>Save</string>
+   </property>
+  </action>
+  <action name="actionOpen">
+   <property name="text">
+    <string>Open</string>
+   </property>
+  </action>
  </widget>
  <layoutdefault spacing="6" margin="11"/>
  <resources>

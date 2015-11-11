@@ -3,14 +3,14 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
-<<<<<<< HEAD
+
 #include <QColor>
-=======
+
 #include <QLabel>
 #include <QWidget>
 #include <vector>
 #include <QTimer>
->>>>>>> origin/master
+
 
 
 namespace Ui {
@@ -21,11 +21,19 @@ class MainWindow;
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
+    Q_PROPERTY(QColor pcolor READ pcolor  NOTIFY colorChanged)
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     ~MainWindow();
     QColor color;
+
+    QColor pcolor() const {
+        return mColor;
+    }
+
+signals :
+    void colorChanged(QColor pcolor);
 
 public slots:
     void xAxisTransSlot();
@@ -37,8 +45,7 @@ public slots:
 
 
 private slots:
-
-
+    void on_colorChooser_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -49,12 +56,11 @@ private:
     int sceneIndex;
 
     QGraphicsScene *spriteEditorScene;
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
     bool isTransformed;
     bool isRotated;
+    QColor mColor;
+
 
 };
 
