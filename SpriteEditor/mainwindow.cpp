@@ -192,7 +192,7 @@ void MainWindow::xAxisTransSlot() {
     QTransform mirror;
 
     if (isTransformed == false)
-        group->setTransform(mirror.scale(-1,1));
+        group->setTransform(mirror.scale(1,-1));
     else
         group->setTransform(mirror.scale(1,-1));
 
@@ -208,7 +208,7 @@ void MainWindow::yAxisTransSlot() {
     if (isRotated == false)
         group->setTransform(mirror.scale(-1,1));
     else
-        group->setTransform(mirror.scale(1,-1));
+        group->setTransform(mirror.scale(-1,1));
 
 
     spriteEditorScene->destroyItemGroup(group);
