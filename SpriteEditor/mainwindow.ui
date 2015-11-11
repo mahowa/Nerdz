@@ -195,16 +195,6 @@
      <number>30</number>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menuBar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1189</width>
-     <height>31</height>
-    </rect>
-   </property>
    <widget class="QWidget" name="currentColorPallete" native="true">
     <property name="geometry">
      <rect>
