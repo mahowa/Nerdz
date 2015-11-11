@@ -58,7 +58,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
     connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
-
+a
 
 
     //Set up the tiles

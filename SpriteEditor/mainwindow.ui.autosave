@@ -231,6 +231,29 @@
      </size>
     </property>
    </widget>
+   <widget class="QScrollArea" name="scenesScroll">
+    <property name="geometry">
+     <rect>
+      <x>750</x>
+      <y>380</y>
+      <width>120</width>
+      <height>107</height>
+     </rect>
+    </property>
+    <property name="widgetResizable">
+     <bool>true</bool>
+    </property>
+    <widget class="QWidget" name="scrollAreaWidgetContents">
+     <property name="geometry">
+      <rect>
+       <x>0</x>
+       <y>0</y>
+       <width>118</width>
+       <height>105</height>
+      </rect>
+     </property>
+    </widget>
+   </widget>
   </widget>
   <widget class="QToolBar" name="mainToolBar">
    <attribute name="toolBarArea">
