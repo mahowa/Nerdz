@@ -3,14 +3,14 @@
 
 #include <QMainWindow>
 #include <QGraphicsScene>
-<<<<<<< HEAD
+
 #include <QColor>
-=======
+
 #include <QLabel>
 #include <QWidget>
 #include <vector>
 #include <QTimer>
->>>>>>> origin/master
+
 
 
 namespace Ui {
@@ -49,10 +49,7 @@ private:
     int sceneIndex;
 
     QGraphicsScene *spriteEditorScene;
-<<<<<<< HEAD
-=======
 
->>>>>>> origin/master
     bool isTransformed;
     bool isRotated;
 
