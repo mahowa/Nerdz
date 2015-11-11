@@ -18,13 +18,15 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
+<<<<<<< HEAD
 #include <QtWidgets/QMenuBar>
+=======
+>>>>>>> Transformation-Branch
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSlider>
 #include <QtWidgets/QSpinBox>
 #include <QtWidgets/QStatusBar>
-#include <QtWidgets/QToolBar>
 #include <QtWidgets/QToolButton>
 #include <QtWidgets/QWidget>
 
@@ -48,8 +50,11 @@ public:
     QRadioButton *setRange;
     QSlider *speedSlider;
     QSpinBox *spinBox;
+<<<<<<< HEAD
     QMenuBar *menuBar;
     QToolBar *mainToolBar;
+=======
+>>>>>>> Transformation-Branch
     QStatusBar *statusBar;
     QDockWidget *frameDock;
     QWidget *dockWidgetContents_2;
@@ -125,11 +130,15 @@ public:
         speedSlider = new QSlider(centralWidget);
         speedSlider->setObjectName(QStringLiteral("speedSlider"));
         speedSlider->setGeometry(QRect(800, 290, 160, 22));
+<<<<<<< HEAD
         speedSlider->setMaximum(30);
+=======
+>>>>>>> Transformation-Branch
         speedSlider->setOrientation(Qt::Horizontal);
         spinBox = new QSpinBox(centralWidget);
         spinBox->setObjectName(QStringLiteral("spinBox"));
         spinBox->setGeometry(QRect(970, 290, 48, 24));
+<<<<<<< HEAD
         spinBox->setMinimum(0);
         spinBox->setMaximum(30);
         MainWindow->setCentralWidget(centralWidget);
@@ -140,6 +149,9 @@ public:
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
+=======
+        MainWindow->setCentralWidget(centralWidget);
+>>>>>>> Transformation-Branch
         statusBar = new QStatusBar(MainWindow);
         statusBar->setObjectName(QStringLiteral("statusBar"));
         MainWindow->setStatusBar(statusBar);
