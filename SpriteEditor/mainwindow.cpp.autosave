@@ -6,7 +6,7 @@
 // Testing Includes
 #include <iostream>
 #include <stdio.h>
-#include <stdlib.h>
+#include <stdlib.h
 
 /*
  * Tile
@@ -21,6 +21,7 @@
 #include <QRgb>
 #include<QGraphicsRectItem>
 #include<QMouseEvent>
+#include <QFileDialog>
 
 #include<QColorDialog>
 
@@ -58,7 +59,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
     connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
-a
+    // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
 
 
     //Set up the tiles
@@ -240,4 +241,16 @@ void MainWindow::on_colorChooser_clicked()
     ui->currentColorPallete->setPalette(pal);
 
     //emit colorChanged(mColor);
+}
+
+void MainWindow::on_SaveFileButton_clicked()
+{
+    QString filename = QFileDialog::getSaveFileName();
+
+
+}
+
+void MainWindow::on_toolButton_2_clicked()
+{
+
 }
