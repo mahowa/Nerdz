@@ -33,7 +33,7 @@ MOVE          = mv -f
 TAR           = tar -cf
 COMPRESS      = gzip -9f
 DISTNAME      = SpriteEditor1.0.0
-DISTDIR = /Users/ramilakus/Desktop/Nerdz2/build-SpriteEditor-Desktop_Qt_5_5_0_clang_64bit-Debug/.tmp/SpriteEditor1.0.0
+DISTDIR = /Users/ramilakus/Desktop/Nerdz/build-SpriteEditor-Desktop_Qt_5_5_0_clang_64bit-Debug/.tmp/SpriteEditor1.0.0
 LINK          = /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/bin/clang++
 LFLAGS        = -headerpad_max_install_names -Wl,-syslibroot,/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX10.11.sdk -mmacosx-version-min=10.7 -Wl,-rpath,/Users/ramilakus/Qt/5.5/clang_64/lib
 LIBS          = $(SUBLIBS) -F/Users/ramilakus/Qt/5.5/clang_64/lib -framework QtWidgets -framework QtGui -framework QtCore -framework DiskArbitration -framework IOKit -framework OpenGL -framework AGL 
@@ -174,6 +174,7 @@ DIST          = ../../../Qt/5.5/clang_64/mkspecs/features/spec_pre.prf \
 		../../../Qt/5.5/clang_64/mkspecs/features/qt_config.prf \
 		../../../Qt/5.5/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Qt/5.5/clang_64/mkspecs/features/spec_post.prf \
+		../SpriteEditor/.qmake.stash \
 		../../../Qt/5.5/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt/5.5/clang_64/mkspecs/features/default_pre.prf \
 		../../../Qt/5.5/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -356,6 +357,7 @@ Makefile: ../SpriteEditor/SpriteEditor.pro ../../../Qt/5.5/clang_64/mkspecs/macx
 		../../../Qt/5.5/clang_64/mkspecs/features/qt_config.prf \
 		../../../Qt/5.5/clang_64/mkspecs/macx-clang/qmake.conf \
 		../../../Qt/5.5/clang_64/mkspecs/features/spec_post.prf \
+		.qmake.stash \
 		../../../Qt/5.5/clang_64/mkspecs/features/exclusive_builds.prf \
 		../../../Qt/5.5/clang_64/mkspecs/features/default_pre.prf \
 		../../../Qt/5.5/clang_64/mkspecs/features/mac/default_pre.prf \
@@ -499,6 +501,7 @@ Makefile: ../SpriteEditor/SpriteEditor.pro ../../../Qt/5.5/clang_64/mkspecs/macx
 ../../../Qt/5.5/clang_64/mkspecs/features/qt_config.prf:
 ../../../Qt/5.5/clang_64/mkspecs/macx-clang/qmake.conf:
 ../../../Qt/5.5/clang_64/mkspecs/features/spec_post.prf:
+.qmake.stash:
 ../../../Qt/5.5/clang_64/mkspecs/features/exclusive_builds.prf:
 ../../../Qt/5.5/clang_64/mkspecs/features/default_pre.prf:
 ../../../Qt/5.5/clang_64/mkspecs/features/mac/default_pre.prf:
@@ -597,6 +600,8 @@ moc_mainwindow.cpp: ../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QMa
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../../Qt/5.5/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.5/clang_64/lib/QtGui.framework/Headers/qcolor.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QLabel \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
@@ -604,7 +609,7 @@ moc_mainwindow.cpp: ../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QMa
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QTimer \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../SpriteEditor/mainwindow.h
-	/Users/ramilakus/Qt/5.5/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ramilakus/Qt/5.5/clang_64/mkspecs/macx-clang -I/Users/ramilakus/Desktop/Nerdz2/SpriteEditor -I/Users/ramilakus/Qt/5.5/clang_64/lib/QtWidgets.framework/Headers -I/Users/ramilakus/Qt/5.5/clang_64/lib/QtGui.framework/Headers -I/Users/ramilakus/Qt/5.5/clang_64/lib/QtCore.framework/Headers -I. -F/Users/ramilakus/Qt/5.5/clang_64/lib ../SpriteEditor/mainwindow.h -o moc_mainwindow.cpp
+	/Users/ramilakus/Qt/5.5/clang_64/bin/moc $(DEFINES) -D__APPLE__ -D__GNUC__=4 -D__APPLE_CC__ -I/Users/ramilakus/Qt/5.5/clang_64/mkspecs/macx-clang -I/Users/ramilakus/Desktop/Nerdz/SpriteEditor -I/Users/ramilakus/Qt/5.5/clang_64/lib/QtWidgets.framework/Headers -I/Users/ramilakus/Qt/5.5/clang_64/lib/QtGui.framework/Headers -I/Users/ramilakus/Qt/5.5/clang_64/lib/QtCore.framework/Headers -I. -F/Users/ramilakus/Qt/5.5/clang_64/lib ../SpriteEditor/mainwindow.h -o moc_mainwindow.cpp
 
 compiler_moc_source_make_all:
 compiler_moc_source_clean:
@@ -631,6 +636,8 @@ main.o: ../SpriteEditor/main.cpp ../SpriteEditor/mainwindow.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../../Qt/5.5/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.5/clang_64/lib/QtGui.framework/Headers/qcolor.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QLabel \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
@@ -646,6 +653,8 @@ mainwindow.o: ../SpriteEditor/mainwindow.cpp ../SpriteEditor/mainwindow.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../../Qt/5.5/clang_64/lib/QtGui.framework/Headers/QColor \
+		../../../Qt/5.5/clang_64/lib/QtGui.framework/Headers/qcolor.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QLabel \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
@@ -659,8 +668,6 @@ mainwindow.o: ../SpriteEditor/mainwindow.cpp ../SpriteEditor/mainwindow.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsView \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
 		../SpriteEditor/tile.h \
-		../../../Qt/5.5/clang_64/lib/QtGui.framework/Headers/QColor \
-		../../../Qt/5.5/clang_64/lib/QtGui.framework/Headers/qcolor.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QT \
@@ -670,10 +677,12 @@ mainwindow.o: ../SpriteEditor/mainwindow.cpp ../SpriteEditor/mainwindow.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsRectItem \
 		../../../Qt/5.5/clang_64/lib/QtGui.framework/Headers/QMouseEvent \
 		../../../Qt/5.5/clang_64/lib/QtGui.framework/Headers/qevent.h \
+		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QColorDialog \
+		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qcolordialog.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QPushButton \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qpushbutton.h \
-		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QColorDialog \
-		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qcolordialog.h
+		../../../Qt/5.5/clang_64/lib/QtGui.framework/Headers/QPalette \
+		../../../Qt/5.5/clang_64/lib/QtGui.framework/Headers/qpalette.h
 	$(CXX) -c $(CXXFLAGS) $(INCPATH) -o mainwindow.o ../SpriteEditor/mainwindow.cpp
 
 tile.o: ../SpriteEditor/tile.cpp ../SpriteEditor/tile.h \
@@ -681,6 +690,17 @@ tile.o: ../SpriteEditor/tile.cpp ../SpriteEditor/tile.h \
 		../../../Qt/5.5/clang_64/lib/QtGui.framework/Headers/qcolor.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsItem \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsitem.h \
+		../SpriteEditor/mainwindow.h \
+		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QMainWindow \
+		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
+		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QGraphicsScene \
+		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
+		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QLabel \
+		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
+		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QWidget \
+		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/QTimer \
+		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qtimer.h \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/Qt \
 		../../../Qt/5.5/clang_64/lib/QtCore.framework/Headers/qnamespace.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/QtWidgets \
@@ -709,7 +729,6 @@ tile.o: ../SpriteEditor/tile.cpp ../SpriteEditor/tile.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicslayoutitem.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicslinearlayout.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsproxywidget.h \
-		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsscene.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicssceneevent.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicstransform.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgraphicsview.h \
@@ -748,7 +767,6 @@ tile.o: ../SpriteEditor/tile.cpp ../SpriteEditor/tile.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qstackedlayout.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qtooltip.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qwhatsthis.h \
-		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qwidget.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qwidgetaction.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qkeyeventtransition.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qmouseeventtransition.h \
@@ -786,10 +804,8 @@ tile.o: ../SpriteEditor/tile.cpp ../SpriteEditor/tile.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qframe.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qgroupbox.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qkeysequenceedit.h \
-		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qlabel.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qlcdnumber.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qlineedit.h \
-		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qmainwindow.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qmdiarea.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qmdisubwindow.h \
 		../../../Qt/5.5/clang_64/lib/QtWidgets.framework/Headers/qmenu.h \

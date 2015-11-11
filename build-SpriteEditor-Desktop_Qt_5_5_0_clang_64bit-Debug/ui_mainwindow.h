@@ -18,8 +18,6 @@
 #include <QtWidgets/QHeaderView>
 #include <QtWidgets/QLabel>
 #include <QtWidgets/QMainWindow>
-#include <QtWidgets/QMenu>
-#include <QtWidgets/QMenuBar>
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QRadioButton>
 #include <QtWidgets/QSlider>
@@ -52,8 +50,8 @@ public:
     QSlider *speedSlider;
     QSpinBox *spinBox;
     QWidget *currentColorPallete;
-    QMenuBar *menuBar;
-    QMenu *menuFile;
+    QToolButton *SaveFileButton;
+    QToolButton *toolButton_2;
     QToolBar *mainToolBar;
     QStatusBar *statusBar;
     QDockWidget *frameDock;
@@ -146,13 +144,21 @@ public:
         currentColorPallete->setObjectName(QStringLiteral("currentColorPallete"));
         currentColorPallete->setGeometry(QRect(690, 220, 31, 31));
         currentColorPallete->setAutoFillBackground(true);
+        SaveFileButton = new QToolButton(centralWidget);
+        SaveFileButton->setObjectName(QStringLiteral("SaveFileButton"));
+        SaveFileButton->setGeometry(QRect(640, 260, 41, 41));
+        QIcon icon4;
+        icon4.addFile(QStringLiteral(":/save icon.png"), QSize(), QIcon::Normal, QIcon::Off);
+        SaveFileButton->setIcon(icon4);
+        SaveFileButton->setIconSize(QSize(71, 71));
+        toolButton_2 = new QToolButton(centralWidget);
+        toolButton_2->setObjectName(QStringLiteral("toolButton_2"));
+        toolButton_2->setGeometry(QRect(680, 260, 41, 41));
+        QIcon icon5;
+        icon5.addFile(QStringLiteral(":/open file.png"), QSize(), QIcon::Normal, QIcon::Off);
+        toolButton_2->setIcon(icon5);
+        toolButton_2->setIconSize(QSize(71, 71));
         MainWindow->setCentralWidget(centralWidget);
-        menuBar = new QMenuBar(MainWindow);
-        menuBar->setObjectName(QStringLiteral("menuBar"));
-        menuBar->setGeometry(QRect(0, 0, 1189, 22));
-        menuFile = new QMenu(menuBar);
-        menuFile->setObjectName(QStringLiteral("menuFile"));
-        MainWindow->setMenuBar(menuBar);
         mainToolBar = new QToolBar(MainWindow);
         mainToolBar->setObjectName(QStringLiteral("mainToolBar"));
         MainWindow->addToolBar(Qt::TopToolBarArea, mainToolBar);
@@ -174,10 +180,6 @@ public:
         frameDock->setWidget(dockWidgetContents_2);
         MainWindow->addDockWidget(static_cast<Qt::DockWidgetArea>(1), frameDock);
 
-        menuBar->addAction(menuFile->menuAction());
-        menuFile->addAction(actionSave);
-        menuFile->addAction(actionOpen);
-
         retranslateUi(MainWindow);
         QObject::connect(speedSlider, SIGNAL(valueChanged(int)), spinBox, SLOT(setValue(int)));
         QObject::connect(spinBox, SIGNAL(valueChanged(int)), speedSlider, SLOT(setValue(int)));
@@ -198,7 +200,8 @@ public:
         label->setText(QApplication::translate("MainWindow", "From:", 0));
         label_2->setText(QApplication::translate("MainWindow", "To:", 0));
         setRange->setText(QApplication::translate("MainWindow", "Set Range", 0));
-        menuFile->setTitle(QApplication::translate("MainWindow", "File", 0));
+        SaveFileButton->setText(QApplication::translate("MainWindow", "...", 0));
+        toolButton_2->setText(QApplication::translate("MainWindow", "...", 0));
     } // retranslateUi
 
 };
