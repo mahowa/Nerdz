@@ -32,6 +32,13 @@ public:
         return mColor;
     }
 
+    // Testing Functions
+    void boolFuncTest();
+    void newSceneCountTest();
+    void nextSceneButtonTest();
+    void prevSceneButtonTest();
+    void sceneItemCount();
+
 signals :
     void colorChanged(QColor pcolor);
 
@@ -42,6 +49,7 @@ public slots:
     void newScene();
     void updateScene();
     void on_horizontalSlider_valueChanged();
+    void submitDimensions();
 
 
 private slots:
@@ -51,6 +59,10 @@ private slots:
     void on_nextButton_clicked();
     void on_prevButton_clicked();
     void on_clickedScene(int scene);
+<<<<<<< HEAD
+=======
+    void on_eraseClicked();
+>>>>>>> master
 
 private:
     Ui::MainWindow *ui;
@@ -70,6 +82,10 @@ private:
     int firstSceneDisplayed;
     int tilesWide;
     int tilesTall;
+<<<<<<< HEAD
+=======
+    bool eraseOn;
+>>>>>>> master
 
 };
 
