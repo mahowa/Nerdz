@@ -48,7 +48,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     // Set isRotated to false
     isRotated = false;
 
-    ui->speedSlider->setValue(0);
+    ui->speedSlider->setValue(1);
     ui->currentColorPallete->setPalette(color);
 
     // Connect signals to slots
@@ -64,10 +64,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     //color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
 
     connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
+    connect (ui->nextPushButton, SIGNAL(clicked(bool)), this, SLOT(on_nextButton_clicked()));
+    connect (ui->previousPushButton, SIGNAL(clicked(bool)), this, SLOT(on_prevButton_clicked()));
 
 
     //Set up the tiles
     populateScene();
+
+    // Set push buttons
+    ui->nextPushButton->setEnabled(false);
+    ui->previousPushButton->setEnabled(false);
+
+    // Set scene display tracker
+    firstSceneDisplayed = 0;
 }
 
 MainWindow::~MainWindow()
@@ -143,25 +152,65 @@ void MainWindow::populateScene()
             spriteEditorScene->addItem(item);
 
 
-//            // Small view example
-//            QGraphicsScene *testScene(spriteEditorScene);
-//            ui->smallView1->setScene(testScene);
-//            QRectF bounds = testScene->itemsBoundingRect();
-//            ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
-//            ui->smallView1->centerOn(0,0);
-
-        }
-
+    }
+}
       //Add current scene to scenesView
       //*currentScene = spriteEditorScene;//(spriteEditorScene);
       scenes.push_back(spriteEditorScene);
       QRectF bounds = spriteEditorScene->itemsBoundingRect();
       ui->scenesView->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+
      // ui->scenesView->centerOn(0,0);
+
+    //  ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
 
       //updateScene();
 
-    }
+      //            // Small view exampl
+      //            QGraphicsScene *testScene(spriteEditorScene);
+      int sceneNum = scenes.size() - 1;
+      //QRectF bounds;
+      switch (scenes.size()) {
+       case 1:
+           ui->smallView1->setScene(scenes[sceneNum]);
+           bounds = spriteEditorScene->itemsBoundingRect();
+           ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+           ui->smallView1->centerOn(0,0);
+           ui->text1->setText("1");
+           break;
+       case 2:
+           ui->smallView2->setScene(scenes[sceneNum]);
+           bounds = spriteEditorScene->itemsBoundingRect();
+           ui->smallView2->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+           ui->smallView2->centerOn(0,0);
+           ui->text2->setText("2");
+          break;
+       case 3:
+           ui->smallView3->setScene(scenes[sceneNum]);
+           bounds = spriteEditorScene->itemsBoundingRect();
+           ui->smallView3->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+           ui->smallView3->centerOn(0,0);
+           std::cout << "On case 3" << std::endl;
+           ui->text3->setText("3");
+           break;
+       case 4:
+           ui->smallView4->setScene(scenes[sceneNum]);
+           bounds = spriteEditorScene->itemsBoundingRect();
+           ui->smallView4->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+           ui->smallView4->centerOn(0,0);
+           ui->text4->setText("4");
+           break;
+       case 5:
+           ui->smallView5->setScene(scenes[sceneNum]);
+           bounds = spriteEditorScene->itemsBoundingRect();
+           ui->smallView5->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+           ui->smallView5->centerOn(0,0);
+           ui->text5->setText("5");
+           break;
+       default:
+          ui->nextPushButton->setEnabled(true);
+           break;
+       }
 }
 
 void MainWindow::newScene()
@@ -227,12 +276,6 @@ void MainWindow::rotateTransSlot() {
     isRotated = !isRotated;
 }
 
-
-//void MainWindow::on_horizontalSlider_valueChanged(int value)
-//{
-    //sceneTimer(200 * );
-//}
-
 void MainWindow::on_horizontalSlider_valueChanged()
 {
     if(ui->speedSlider->value() == 0)
@@ -262,6 +305,52 @@ void MainWindow::on_SaveFileButton_clicked()
 }
 
 void MainWindow::on_toolButton_2_clicked()
+{
+
+}
+
+void MainWindow::on_nextButton_clicked()
+{
+    firstSceneDisplayed++;
+    std::cout << "Made it here" << std::endl;
+        QRectF bounds;
+        ui->smallView1->setScene(scenes[firstSceneDisplayed]);
+         bounds = spriteEditorScene->itemsBoundingRect();
+         ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+         ui->smallView1->centerOn(0,0);
+         ui->text1->setText(QString::number(firstSceneDisplayed + 1));
+
+         ui->smallView2->setScene(scenes[firstSceneDisplayed + 1]);
+         bounds = spriteEditorScene->itemsBoundingRect();
+         ui->smallView2->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+         ui->smallView2->centerOn(0,0);
+         ui->text2->setText(QString::number(firstSceneDisplayed + 2));
+
+         ui->smallView3->setScene(scenes[firstSceneDisplayed + 2]);
+         bounds = spriteEditorScene->itemsBoundingRect();
+         ui->smallView3->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+         ui->smallView3->centerOn(0,0);
+         std::cout << "On case 3" << std::endl;
+         ui->text3->setText(QString::number(firstSceneDisplayed + 3));
+
+         ui->smallView4->setScene(scenes[firstSceneDisplayed + 3]);
+         bounds = spriteEditorScene->itemsBoundingRect();
+         ui->smallView4->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+         ui->smallView4->centerOn(0,0);
+         ui->text4->setText(QString::number(firstSceneDisplayed + 4));
+
+         ui->smallView5->setScene(scenes[firstSceneDisplayed + 4]);
+         bounds = spriteEditorScene->itemsBoundingRect();
+         ui->smallView5->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+         ui->smallView5->centerOn(0,0);
+         ui->text5->setText(QString::number(firstSceneDisplayed + 5));
+
+         ui->previousPushButton->setEnabled(true);
+
+
+}
+
+void MainWindow::on_prevButton_clicked()
 {
 
 }

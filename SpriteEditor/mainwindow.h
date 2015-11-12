@@ -46,10 +46,10 @@ public slots:
 
 private slots:
     void on_colorChooser_clicked();
-
     void on_SaveFileButton_clicked();
-
     void on_toolButton_2_clicked();
+    void on_nextButton_clicked();
+    void on_prevButton_clicked();
 
 private:
     Ui::MainWindow *ui;
@@ -63,7 +63,9 @@ private:
 
     bool isTransformed;
     bool isRotated;
+    bool firstRun;
     QColor mColor;
+    int firstSceneDisplayed;
 
 
 };
