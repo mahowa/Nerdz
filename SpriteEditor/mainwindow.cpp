@@ -485,3 +485,68 @@ void MainWindow::on_SaveFileButton_clicked()
     }
 
 }
+
+// Testing Functions
+void MainWindow::boolFuncTest()
+{
+    std::cout << "Running boolFuncTest" << std::endl;
+    bool startState = false;
+    bool finishState = boolSwap(startState);
+
+    std::cout << "Expected value: 1" << std::endl;
+    std::cout << "Actual value: " << finishState << std::endl;
+}
+
+void MainWindow:: newSceneCountTest()
+{
+    std::cout << "Running newSceneCountTest" << std::endl;
+
+    std::cout << "Testing Initial Starting Amount of Scenes" << std::endl;
+    std::cout << "Expected value: 1" << std::endl;
+    std::cout << "Actual value: " << scenes.size() << std::endl;
+
+    std::cout << "Testing Add Frame" << std::endl;
+    newScene();
+    std::cout << "Expected value: 2" << std::endl;
+    std::cout << "Actual value: " << scenes.size() << std::endl;
+}
+
+void MainWindow:: nextSceneButtonTest()
+{
+    std::cout << "Running nextSceneButtonTest" << std::endl;
+
+    for (int i = 0; i < 5; i++)
+        newScene();
+
+    on_nextButton_clicked();
+
+    std::cout << "Testing first scene to be displayed after Next button is clicked" << std::endl;
+    std::cout << "Expected value: 2" << std::endl;
+    std::cout << "Actual value: " << firstSceneDisplayed << std::endl;
+}
+
+void MainWindow:: prevSceneButtonTest()
+{
+    std::cout << "Running prevSceneButtonTest" << std::endl;
+
+    for (int i = 0; i < 5; i++)
+        newScene();
+
+    on_nextButton_clicked();
+    on_prevButton_clicked();
+
+    std::cout << "Testing first scene to be displayed after prev button is clicked" << std::endl;
+    std::cout << "Expected value: 1" << std::endl;
+    std::cout << "Actual value: " << firstSceneDisplayed << std::endl;
+}
+
+void MainWindow:: sceneItemCount()
+{
+    std::cout << "Running sceneItemCount on 16x16 scene" << std::endl;
+
+    QList<QGraphicsItem*>itemList = spriteEditorScene->items();
+
+    std::cout << "Expected value: 256" << std::endl;
+    std::cout << "Actual value: " << itemList.size() << std::endl;
+
+}
