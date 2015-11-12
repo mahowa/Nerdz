@@ -412,6 +412,13 @@ void MainWindow::on_toolButton_2_clicked()
 
 }
 
+/*
+ * On NextButton Clicked Method
+ * Returns: Void
+ * Parameters: Void
+ * This method moves to the next scene created
+ * in the list of scenes
+*/
 void MainWindow::on_nextButton_clicked()
 {
         QRectF bounds;
@@ -455,6 +462,13 @@ void MainWindow::on_nextButton_clicked()
         setLeftSlots();
 }
 
+/*
+ * On PrevButton Clicked Method
+ * Returns: Void
+ * Parameters: Void
+ * This method moves to the previous scene created
+ * in the list of scenes
+*/
 void MainWindow::on_prevButton_clicked()
 {
      QRectF bounds;
@@ -498,11 +512,25 @@ void MainWindow::on_prevButton_clicked()
      setLeftSlots();
 }
 
+/*
+ * On Clicked Scene Method
+ * Returns: Void
+ * Parameters: An int
+ * This method selects a certain scene that
+ * has been clicked in the list of scenes and loads the
+ * scene in the main window
+*/
 void MainWindow::on_clickedScene(int scene){
     spriteEditorScene = scenes[scene];
     ui->SpriteEditor->setScene(scenes[scene]);
 }
 
+/*
+ * Set Left Slots method
+ * Returns: Void
+ * Parameters: None
+ * This method fills the left sidebar boxes with scenes.
+*/
 void MainWindow::setLeftSlots(){
     QSignalMapper *mapper = new QSignalMapper(this);
 
@@ -523,6 +551,14 @@ void MainWindow::setLeftSlots(){
 
     connect(mapper, SIGNAL(mapped(int)), this, SLOT(on_clickedScene(int)));
 }
+
+/*
+ * On SaveFile Clicked Method
+ * Returns: Void
+ * Parameters: Void
+ * This method saves all of the scenes created
+ * and all the colors and attributes of the tiles
+*/
 void MainWindow::on_SaveFileButton_clicked()
 {
     QList<QGraphicsItem*> TileGraphicItem;
@@ -574,6 +610,12 @@ void MainWindow::boolFuncTest()
     std::cout << "Actual value: " << finishState << std::endl;
 }
 
+/*
+ * New Scene Test
+ * Returns: Void
+ * Parameters: Void
+ * This method tests to see if a new scene is created
+*/
 void MainWindow:: newSceneCountTest()
 {
     std::cout << "Running newSceneCountTest" << std::endl;
@@ -588,6 +630,13 @@ void MainWindow:: newSceneCountTest()
     std::cout << "Actual value: " << scenes.size() << std::endl;
 }
 
+/*
+ * Next Scene Test
+ * Returns: Void
+ * Parameters: Void
+ * This method tests to see if a next scene is selected
+ * and displayed in the main window area
+*/
 void MainWindow:: nextSceneButtonTest()
 {
     std::cout << "Running nextSceneButtonTest" << std::endl;
@@ -602,6 +651,13 @@ void MainWindow:: nextSceneButtonTest()
     std::cout << "Actual value: " << firstSceneDisplayed << std::endl;
 }
 
+/*
+ * Prev Scene Test
+ * Returns: Void
+ * Parameters: Void
+ * This method tests to see if a prev scene is selected
+ * and displayed in the main window area
+*/
 void MainWindow:: prevSceneButtonTest()
 {
     std::cout << "Running prevSceneButtonTest" << std::endl;
@@ -617,6 +673,12 @@ void MainWindow:: prevSceneButtonTest()
     std::cout << "Actual value: " << firstSceneDisplayed << std::endl;
 }
 
+/*
+ * Scene Item Count Test
+ * Returns: Void
+ * Parameters: Void
+ * This method tests to see how many scenes are in the program
+*/
 void MainWindow:: sceneItemCount()
 {
     std::cout << "Running sceneItemCount on 16x16 scene" << std::endl;
