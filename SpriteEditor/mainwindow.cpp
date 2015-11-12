@@ -68,7 +68,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->nextPushButton, SIGNAL(clicked()), this, SLOT(on_nextButton_clicked()));
     connect (ui->previousPushButton, SIGNAL(clicked()), this, SLOT(on_prevButton_clicked()));
 
-
+    isLoad = true;
     //Set up the tiles
     populateScene();
 
@@ -97,9 +97,7 @@ MainWindow::~MainWindow()
 }
 
 bool boolSwap(bool a){
-    if(a)
-        return false;
-    else return true;
+  return !a;
 }
 
 void MainWindow::populateScene()
@@ -115,17 +113,40 @@ void MainWindow::populateScene()
 
 
 
-    //Number of tiles per row & height
-    int squareCount = 16;
+    double tilesWide = 8.0;
+    double tilesTall = 16.0;
 
-    int width = ui->SpriteEditor->width();
-    int height = ui->SpriteEditor->height();
+    double width = ui->SpriteEditor->width();
+    double height = ui->SpriteEditor->height();
+
+    if(isLoad){
+        if(tilesWide< tilesTall){
+            width *= (tilesWide/ tilesTall);
+        }
+        else if(tilesTall < tilesWide){
+            height *=(tilesTall/tilesWide);
+        }
+        isLoad = false;
+    }
+    QRect rect;
+    rect.setHeight(height);
+    rect.setWidth(width);
+    ui->SpriteEditor->setGeometry(rect);
+
+
+    //Number of tiles per row & height
+    int squareCount = 24;
+
+
 
     int counter = 0;
     bool isSwap = true;
-    int tileWidth = width/squareCount;
-    int tileHeight= height/squareCount;
-    //    //QImage image();
+
+
+    double smallestDim = std::min(width,height);
+    int smallestTileLength = std::min(tilesWide,tilesTall);
+    double tilesize = smallestDim/smallestTileLength;
+
 
 
     /*
@@ -133,7 +154,7 @@ void MainWindow::populateScene()
      * int the top left. (0,0) in our coordinate system
      * is in the center of the QGraphicsView
      */
-    for (int i = -height/2; i < height/2; i += tileHeight) {
+    for (double i = -height/2; i < height/2; i += tilesize) {
 
         //If the dimentions are even numbers we must swap each row
         if(squareCount % 2 == 0)
@@ -142,35 +163,33 @@ void MainWindow::populateScene()
         /*
          * Traverse the Scene in the X Directions
          */
-        for (int j = -width/2; j < width/2; j += tileWidth) {
+        for (double j = -width/2; j < width/2; j += tilesize) {
 
             //Every Column swap the color
             isSwap = boolSwap(isSwap);
 
             QColor color;
             if(isSwap)
-                color = QColor(169, 169, 169);
+                color= QColor(169, 169, 169);
             else
                 color = QColor(211, 211, 211);
             counter++;
 
 
-            QGraphicsItem *item = new Tile(color, j, i, tileWidth, this);
-            //QGraphicsRectItem *item = new QGraphicsRectItem();
-            //item->setRect( -tileWidth/2.0, tileHeight/2.0, tileWidth, tileHeight);
-            //item->setBrush(color);
+            QGraphicsItem *item = new Tile(color, j, i, tilesize, this);
 
             item->setPos(QPointF(j, i));
             spriteEditorScene->addItem(item);
+//            tiles.push_back(item);
 
 
-    }
+        }
 }
-      //Add current scene to scenesView
-      //*currentScene = spriteEditorScene;//(spriteEditorScene);
-      scenes.push_back(spriteEditorScene);
-      QRectF bounds = spriteEditorScene->itemsBoundingRect();
-      ui->scenesView->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+    //Add current scene to scenesView
+    scenes.push_back(spriteEditorScene);
+    QRectF bounds = spriteEditorScene->sceneRect();
+    ui->scenesView->fitInView(bounds,Qt::KeepAspectRatio);
+    ui->scenesView->setFrameRect(bounds.toAlignedRect());
 
      // ui->scenesView->centerOn(0,0);
 

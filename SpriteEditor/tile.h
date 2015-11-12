@@ -28,6 +28,7 @@ protected:
 private:
     int x;
     int y;
+
     int squareSide;
     QColor tcolor;
     QVector<QPointF> stuff;

@@ -60,7 +60,7 @@ private:
     std::vector<QGraphicsScene*> scenes;
     QTimer* sceneTimer;
     int sceneIndex;
-
+    bool isLoad;
     QGraphicsScene *spriteEditorScene;
 
     bool isTransformed;
