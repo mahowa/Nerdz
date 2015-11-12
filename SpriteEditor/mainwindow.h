@@ -32,6 +32,13 @@ public:
         return mColor;
     }
 
+    // Testing Functions
+    void boolFuncTest();
+    void newSceneCountTest();
+    void nextSceneButtonTest();
+    void prevSceneButtonTest();
+    void sceneItemCount();
+
 signals :
     void colorChanged(QColor pcolor);
 

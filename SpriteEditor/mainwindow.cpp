@@ -66,6 +66,10 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->nextPushButton, SIGNAL(clicked()), this, SLOT(on_nextButton_clicked()));
     connect (ui->previousPushButton, SIGNAL(clicked()), this, SLOT(on_prevButton_clicked()));
 
+    tilesWide = 16;
+    tilesTall = 16;
+
+
     isLoad = true;
     //Set up the tiles
     populateScene();
@@ -110,19 +114,15 @@ void MainWindow::populateScene()
     ui->SpriteEditor->setScene(spriteEditorScene);
 
 
-
-    tilesWide = 16.0;
-    tilesTall = 16.0;
-
     double width = ui->SpriteEditor->width();
     double height = ui->SpriteEditor->height();
 
     if(isLoad){
         if(tilesWide< tilesTall){
-            width *= (tilesWide/ tilesTall);
+            width *= ((double)tilesWide/ (double)tilesTall);
         }
         else if(tilesTall < tilesWide){
-            height *=(tilesTall/tilesWide);
+            height *=((double)tilesTall/(double)tilesWide);
         }
         isLoad = false;
     }
@@ -453,7 +453,9 @@ void MainWindow::on_SaveFileButton_clicked()
         }
     }
 
-     QString filename = QFileDialog::getSaveFileName();
+     QString filename = QFileDialog::getSaveFileName(this, tr("Save File"),
+                                                      "untitled.ssp",
+                                                      tr("Images (*.ssp)"));
      QFile file(filename);
      QTextStream stream(&file);
 
@@ -478,8 +480,6 @@ void MainWindow::on_SaveFileButton_clicked()
     }
 
 }
-
-
 void MainWindow::on_LoadFileButton_clicked(){
     QString filename = QFileDialog::getOpenFileName();
     QFile file(filename);
@@ -524,25 +524,16 @@ void MainWindow::on_LoadFileButton_clicked(){
 
         }
     }
-        QList<QColor> Colors;
-        int i = 0;
-        for(int j = 0; j<totalScenes; j++ ){
-            for(i;i<tilesWide*tilesTall; i++ ){
-                QColor color = tileColors.at(i);
-                Colors.push_back(color);
 
-
-            }
-        }
         double width = ui->SpriteEditor->width();
         double height = ui->SpriteEditor->height();
 
 
         if(tilesWide< tilesTall){
-            width *= (tilesWide/ tilesTall);
+            width *= ((double)tilesWide/(double) tilesTall);
         }
         else if(tilesTall < tilesWide){
-            height *=(tilesTall/tilesWide);
+            height *=((double)tilesTall/(double)tilesWide);
         }
 
 
@@ -563,8 +554,10 @@ void MainWindow::on_LoadFileButton_clicked(){
 
 
           int colorIndex = 0;
-
+        scenes.clear();
          while(totalScenes--){
+
+             spriteEditorScene = new QGraphicsScene;
         /*
          * Traverse the Scene in the Y direction starting
          * int the top left. (0,0) in our coordinate system
@@ -577,7 +570,7 @@ void MainWindow::on_LoadFileButton_clicked(){
                  */
                 for (double l = -width/2; l < width/2; l += tilesize) {
 
-                    QGraphicsItem *item = new Tile(Colors[colorIndex++], l, k, tilesize, this);
+                    QGraphicsItem *item = new Tile(tileColors[colorIndex++], l, k, tilesize, this);
 
                     item->setPos(QPointF(l, k));
                     spriteEditorScene->addItem(item);
@@ -593,7 +586,55 @@ void MainWindow::on_LoadFileButton_clicked(){
             ui->scenesView->fitInView(bounds,Qt::KeepAspectRatio);
             ui->scenesView->setFrameRect(bounds.toAlignedRect());
 
+            int sceneNum = scenes.size() - 1;
+            //QRectF bounds;
+            switch (scenes.size()) {
+             case 1:
+                 ui->smallView1->setScene(scenes[sceneNum]);
+                 bounds = spriteEditorScene->itemsBoundingRect();
+                 ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+                 ui->smallView1->centerOn(0,0);
+                 ui->text1->setText("1");
+                 ui->viewButton1->setEnabled(true);
+                 break;
+             case 2:
+                 ui->smallView2->setScene(scenes[sceneNum]);
+                 bounds = spriteEditorScene->itemsBoundingRect();
+                 ui->smallView2->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+                 ui->smallView2->centerOn(0,0);
+                 ui->text2->setText("2");
+                 ui->viewButton2->setEnabled(true);
+                break;
+             case 3:
+                 ui->smallView3->setScene(scenes[sceneNum]);
+                 bounds = spriteEditorScene->itemsBoundingRect();
+                 ui->smallView3->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+                 ui->smallView3->centerOn(0,0);
+                 ui->text3->setText("3");
+                 ui->viewButton3->setEnabled(true);
+                 break;
+             case 4:
+                 ui->smallView4->setScene(scenes[sceneNum]);
+                 bounds = spriteEditorScene->itemsBoundingRect();
+                 ui->smallView4->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+                 ui->smallView4->centerOn(0,0);
+                 ui->text4->setText("4");
+                 ui->viewButton4->setEnabled(true);
+                 break;
+             case 5:
+                 ui->smallView5->setScene(scenes[sceneNum]);
+                 bounds = spriteEditorScene->itemsBoundingRect();
+                 ui->smallView5->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+                 ui->smallView5->centerOn(0,0);
+                 ui->text5->setText("5");
+                 ui->viewButton5->setEnabled(true);
+                 break;
+             default:
+                ui->nextPushButton->setEnabled(true);
+                 break;
+             }
          }
+         ui->SpriteEditor->setScene(scenes[0]);
 
 
 }
