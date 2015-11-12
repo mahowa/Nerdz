@@ -13,6 +13,7 @@ public:
     QRectF boundingRect() const Q_DECL_OVERRIDE;
     //QPainterPath shape() const Q_DECL_OVERRIDE;
     void paint(QPainter *painter, const QStyleOptionGraphicsItem *item, QWidget *widget) Q_DECL_OVERRIDE;
+    QColor tcolor;
 
 protected:
     void mousePressEvent(QGraphicsSceneMouseEvent *event) Q_DECL_OVERRIDE;
@@ -30,7 +31,7 @@ private:
     int y;
 
     int squareSide;
-    QColor tcolor;
+    //QColor tcolor;
     QVector<QPointF> stuff;
     MainWindow *main;
 };
