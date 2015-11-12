@@ -41,6 +41,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     //Initialize sceneIndex
     sceneIndex = 0;
 
+
+
     //Start SceneTimer
     sceneTimer = new QTimer(this);
     sceneTimer->start(100);
@@ -58,8 +60,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->xAxisTrans, SIGNAL(clicked(bool)), this, SLOT(xAxisTransSlot()));
     connect (ui->yAxisTrans, SIGNAL(clicked(bool)), this, SLOT(yAxisTransSlot()));
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
-    connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
+    connect (ui->submitButton, SIGNAL(clicked()), this, SLOT(submitDimensions()));
     //connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
    // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
 
@@ -70,9 +72,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->nextPushButton, SIGNAL(clicked()), this, SLOT(on_nextButton_clicked()));
     connect (ui->previousPushButton, SIGNAL(clicked()), this, SLOT(on_prevButton_clicked()));
 
-    isLoad = true;
-    //Set up the tiles
-    populateScene();
+
 
     // Set push buttons
     ui->nextPushButton->setEnabled(false);
@@ -89,6 +89,15 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     // Set scene display tracker
     firstSceneDisplayed = 1;
 
+    // Loop until dimensions received
+   // while (tilesWide == 0 && tilesTall == 0)
+   // {
+  //  }
+
+    isLoad = true;
+    //Set up the tiles
+   // populateScene();
+
     setLeftSlots();
 
 }
@@ -100,6 +109,17 @@ MainWindow::~MainWindow()
 
 bool boolSwap(bool a){
   return !a;
+}
+
+void MainWindow::submitDimensions()
+{
+    tilesWide = ui->width->value();
+    tilesTall = ui->height->value();
+
+    populateScene();
+    connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
+    ui->submitButton->setEnabled(false);
+
 }
 
 void MainWindow::populateScene()
@@ -115,8 +135,8 @@ void MainWindow::populateScene()
 
 
 
-    tilesWide = 16.0;
-    tilesTall = 16.0;
+    //tilesWide = 16.0;
+   // tilesTall = 16.0;
 
     double width = ui->SpriteEditor->width();
     double height = ui->SpriteEditor->height();

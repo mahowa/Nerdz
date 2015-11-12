@@ -49,6 +49,7 @@ public slots:
     void newScene();
     void updateScene();
     void on_horizontalSlider_valueChanged();
+    void submitDimensions();
 
 
 private slots:
