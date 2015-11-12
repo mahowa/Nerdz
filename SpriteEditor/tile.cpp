@@ -2,6 +2,7 @@
 #include <Qt>
 #include <QtWidgets>
 #include "mainwindow.h"
+#include <QColor>
 
 Tile::Tile(const QColor &color, int x, int y, int width, MainWindow *main)
 {
@@ -15,6 +16,8 @@ Tile::Tile(const QColor &color, int x, int y, int width, MainWindow *main)
     QGraphicsItem::setAcceptHoverEvents(true);
     QGraphicsItem::setAcceptDrops(true);
 }
+
+
 
 QRectF Tile::boundingRect() const
 {

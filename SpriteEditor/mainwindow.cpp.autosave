@@ -331,7 +331,7 @@ void MainWindow::on_colorChooser_clicked()
 }
 
 
-void MainWindow::on_toolButton_2_clicked()
+void MainWindow::on_LoadFileButton_clicked()
 {
 
 }
@@ -484,4 +484,21 @@ void MainWindow::on_SaveFileButton_clicked()
          }
     }
 
+}
+
+
+void MainWindow::on_LoadFileButton_clicked(){
+    QString filename = QFileDialog::getOpenFileName();
+    QFile file(filename);
+    QTextStream stream(&file);
+    
+    QList<QColor> tileco
+    
+    while(!file.atEnd()){
+        QByteArray line = file.readLine();
+        std::string row = line.toStdString();
+        
+    }
+    
+    
 }
