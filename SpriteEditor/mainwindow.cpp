@@ -7,7 +7,7 @@
 #include <iostream>
 #include <stdio.h>
 #include <stdlib.h>
-
+#include <cmath>
 /*
  * Tile
  */
@@ -42,27 +42,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     sceneTimer = new QTimer(this);
     sceneTimer->start(100);
 
-    // Set isTransformed to false
-    isTransformed = false;
-
-    // Set isRotated to false
-    isRotated = false;
-
-
     // Connect signals to slots
     connect (ui->xAxisTrans, SIGNAL(clicked(bool)), this, SLOT(xAxisTransSlot()));
     connect (ui->yAxisTrans, SIGNAL(clicked(bool)), this, SLOT(yAxisTransSlot()));
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
     connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
-    //connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
-   // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
 
 
-    //color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
-
+    isLoad = true;
     //Set up the tiles
     populateScene();
+
+
 }
 
 MainWindow::~MainWindow()
@@ -71,11 +63,9 @@ MainWindow::~MainWindow()
 }
 
 bool boolSwap(bool a){
-    if(a)
-        return false;
-    else return true;
+    return !a;
 }
-
+bool load = true;
 void MainWindow::populateScene()
 {
     spriteEditorScene = new QGraphicsScene;
@@ -88,18 +78,53 @@ void MainWindow::populateScene()
     ui->SpriteEditor->setScene(spriteEditorScene);
 
 
+    /*
+     * EQUATION FOR ADJUSTING THE ASPECT RATIO
+     * adjusted height = <user-chosen width> * original height / original width
+     * adjusted width = <user-chosen height> * original width / original height
+     */
+    double tilesWide = 8.0;
+    double tilesTall = 4.0;
+
+    double width = ui->SpriteEditor->width();
+    double height = ui->SpriteEditor->height();
+    double swidth = ui->scenesView->width();
+    double sheight = ui->scenesView->height();
+
+    if(isLoad){
+        if(tilesWide< tilesTall){
+            width *= (tilesWide/ tilesTall);
+            swidth *= (tilesWide/ tilesTall);
+        }
+        else if(tilesTall < tilesWide){
+            height *=(tilesTall/tilesWide);
+            sheight *=(tilesTall/tilesWide);
+        }
+        isLoad = false;
+    }
+    QRect rect;
+    rect.setHeight(height);
+    rect.setWidth(width);
+    ui->SpriteEditor->setGeometry(rect);
+
+
+//    rect.setHeight(sheight);
+//    rect.setWidth(swidth);
+//    ui->scenesView->setGeometry(rect);
 
     //Number of tiles per row & height
-    int squareCount = 16;
+    int squareCount = 24;
 
-    int width = ui->SpriteEditor->width();
-    int height = ui->SpriteEditor->height();
+
 
     int counter = 0;
     bool isSwap = true;
-    int tileWidth = width/squareCount;
-    int tileHeight= height/squareCount;
-    //    //QImage image();
+
+
+    double smallestDim = std::min(width,height);
+    int smallestTileLength = std::min(tilesWide,tilesTall);
+    double tilesize = smallestDim/smallestTileLength;
+
 
 
     /*
@@ -107,7 +132,7 @@ void MainWindow::populateScene()
      * int the top left. (0,0) in our coordinate system
      * is in the center of the QGraphicsView
      */
-    for (int i = -height/2; i < height/2; i += tileHeight) {
+    for (double i = -height/2; i < height/2; i += tilesize) {
 
         //If the dimentions are even numbers we must swap each row
         if(squareCount % 2 == 0)
@@ -116,7 +141,7 @@ void MainWindow::populateScene()
         /*
          * Traverse the Scene in the X Directions
          */
-        for (int j = -width/2; j < width/2; j += tileWidth) {
+        for (double j = -width/2; j < width/2; j += tilesize) {
 
             //Every Column swap the color
             isSwap = boolSwap(isSwap);
@@ -129,51 +154,31 @@ void MainWindow::populateScene()
             counter++;
 
 
-            QGraphicsItem *item = new Tile(color, j, i, tileWidth, this);
-            //QGraphicsRectItem *item = new QGraphicsRectItem();
-            //item->setRect( -tileWidth/2.0, tileHeight/2.0, tileWidth, tileHeight);
-            //item->setBrush(color);
+            QGraphicsItem *item = new Tile(color, j, i, tilesize, this);
 
             item->setPos(QPointF(j, i));
             spriteEditorScene->addItem(item);
 
-
-//            // Small view example
-//            QGraphicsScene *testScene(spriteEditorScene);
-//            ui->smallView1->setScene(testScene);
-//            QRectF bounds = testScene->itemsBoundingRect();
-//            ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
-//            ui->smallView1->centerOn(0,0);
-
         }
 
       //Add current scene to scenesView
-      //*currentScene = spriteEditorScene;//(spriteEditorScene);
       scenes.push_back(spriteEditorScene);
-      QRectF bounds = spriteEditorScene->itemsBoundingRect();
-      ui->scenesView->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
-     // ui->scenesView->centerOn(0,0);
-
-      //updateScene();
+      QRectF bounds = spriteEditorScene->sceneRect();
+      //ui->scenesView->fitInView(bounds, Qt::KeepAspectRatio);
 
     }
 }
+
+
 
 void MainWindow::newScene()
 {
     populateScene();
 }
 
+
 void MainWindow::updateScene()
 {
-   // if(ui->setRange->isChecked())
-   // {
-       // ui->toBox->setEnabled();
-       // if(ui->fromBui->fromBox->value() > 0 || ui->toBox->value() > 0)
-      //      break breakme;
-   // }
-
-
 
     ui->scenesView->setScene(scenes[sceneIndex]);
     if(sceneIndex == scenes.size() - 1)
@@ -188,27 +193,22 @@ void MainWindow::updateScene()
 
 
 void MainWindow::xAxisTransSlot() {
+    std::cout<<"X"<<std::endl;
     QGraphicsItemGroup *group = spriteEditorScene->createItemGroup(spriteEditorScene->items());
     QTransform mirror;
+    group->setTransform(mirror.scale(1,-1));
 
-    if (isTransformed == false)
-        group->setTransform(mirror.scale(-1,1));
-    else
-        group->setTransform(mirror.scale(1,-1));
 
-    isTransformed = !isTransformed;
+
     spriteEditorScene->destroyItemGroup(group);
 }
 
 void MainWindow::yAxisTransSlot() {
+    std::cout<<"Y"<<std::endl;
     QGraphicsItemGroup *group = spriteEditorScene->createItemGroup(spriteEditorScene->items());
 
     QTransform mirror;
-
-    if (isRotated == false)
-        group->setTransform(mirror.scale(-1,1));
-    else
-        group->setTransform(mirror.scale(1,-1));
+    group->setTransform(mirror.scale(-1,1));
 
 
     spriteEditorScene->destroyItemGroup(group);
@@ -219,11 +219,7 @@ void MainWindow::rotateTransSlot() {
     group->setRotation(90);
     spriteEditorScene->destroyItemGroup(group);
 
-    isRotated = !isRotated;
 }
 
 
-//void MainWindow::on_horizontalSlider_valueChanged(int value)
-//{
-    //sceneTimer(200 * );
-//}
+

@@ -33,11 +33,7 @@ public slots:
     void rotateTransSlot();
     void newScene();
     void updateScene();
-    //void on_horizontalSlider_valueChanged();
 
-
-private slots:
-   // void on_horizontalSlider_valueChanged(int value);
 
 
 private:
@@ -50,8 +46,8 @@ private:
 
     QGraphicsScene *spriteEditorScene;
 
-    bool isTransformed;
-    bool isRotated;
+    bool isLoad;
+
 
 };
 
