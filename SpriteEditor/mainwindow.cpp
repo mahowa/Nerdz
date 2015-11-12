@@ -52,6 +52,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
     // Set isRotated to false
     isRotated = false;
+    eraseOn = false;
 
     ui->speedSlider->setValue(1);
     ui->currentColorPallete->setPalette(color);
@@ -62,6 +63,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
     connect (ui->submitButton, SIGNAL(clicked()), this, SLOT(submitDimensions()));
+    connect (ui->erasePushButton, SIGNAL(clicked(bool)), this, SLOT(on_eraseClicked()));
     //connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
    // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
 
@@ -120,6 +122,20 @@ void MainWindow::submitDimensions()
     connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     ui->submitButton->setEnabled(false);
 
+}
+
+void MainWindow::on_eraseClicked()
+{
+    eraseOn = !eraseOn;
+
+    if (eraseOn)
+    {
+        color = QColor(211, 211, 211);
+    }
+    else
+    {
+        on_colorChooser_clicked();
+    }
 }
 
 void MainWindow::populateScene()

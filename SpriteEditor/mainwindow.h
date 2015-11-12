@@ -59,6 +59,7 @@ private slots:
     void on_nextButton_clicked();
     void on_prevButton_clicked();
     void on_clickedScene(int scene);
+    void on_eraseClicked();
 
 private:
     Ui::MainWindow *ui;
@@ -78,6 +79,7 @@ private:
     int firstSceneDisplayed;
     int tilesWide;
     int tilesTall;
+    bool eraseOn;
 
 };
 
