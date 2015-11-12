@@ -50,10 +50,12 @@ private slots:
     void on_toolButton_2_clicked();
     void on_nextButton_clicked();
     void on_prevButton_clicked();
+    void on_clickedScene(int scene);
 
 private:
     Ui::MainWindow *ui;
     void populateScene();
+    void setLeftSlots();
 
     std::vector<QGraphicsScene*> scenes;
     QTimer* sceneTimer;

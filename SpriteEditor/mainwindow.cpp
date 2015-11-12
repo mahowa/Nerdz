@@ -28,6 +28,7 @@
 #include <QColorDialog>
 #include <QTimer>
 #include <QPalette>
+#include <QSignalMapper>
 
 
 //Constructor
@@ -64,8 +65,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     //color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
 
     connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
-    connect (ui->nextPushButton, SIGNAL(clicked(bool)), this, SLOT(on_nextButton_clicked()));
-    connect (ui->previousPushButton, SIGNAL(clicked(bool)), this, SLOT(on_prevButton_clicked()));
+    connect (ui->nextPushButton, SIGNAL(clicked()), this, SLOT(on_nextButton_clicked()));
+    connect (ui->previousPushButton, SIGNAL(clicked()), this, SLOT(on_prevButton_clicked()));
 
 
     //Set up the tiles
@@ -75,8 +76,19 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     ui->nextPushButton->setEnabled(false);
     ui->previousPushButton->setEnabled(false);
 
+    // Create transparent buttons over the left side scenes and preview.
+    ui->viewButton1->setStyleSheet("QPushButton{background: transparent;}");
+    ui->viewButton2->setStyleSheet("QPushButton{background: transparent;}");
+    ui->viewButton3->setStyleSheet("QPushButton{background: transparent;}");
+    ui->viewButton4->setStyleSheet("QPushButton{background: transparent;}");
+    ui->viewButton5->setStyleSheet("QPushButton{background: transparent;}");
+    ui->previewButton->setStyleSheet("QPushButton{background: transparent;}");
+
     // Set scene display tracker
-    firstSceneDisplayed = 0;
+    firstSceneDisplayed = 1;
+
+    setLeftSlots();
+
 }
 
 MainWindow::~MainWindow()
@@ -177,6 +189,7 @@ void MainWindow::populateScene()
            ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
            ui->smallView1->centerOn(0,0);
            ui->text1->setText("1");
+           ui->viewButton1->setEnabled(true);
            break;
        case 2:
            ui->smallView2->setScene(scenes[sceneNum]);
@@ -184,14 +197,15 @@ void MainWindow::populateScene()
            ui->smallView2->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
            ui->smallView2->centerOn(0,0);
            ui->text2->setText("2");
+           ui->viewButton2->setEnabled(true);
           break;
        case 3:
            ui->smallView3->setScene(scenes[sceneNum]);
            bounds = spriteEditorScene->itemsBoundingRect();
            ui->smallView3->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
            ui->smallView3->centerOn(0,0);
-           std::cout << "On case 3" << std::endl;
            ui->text3->setText("3");
+           ui->viewButton3->setEnabled(true);
            break;
        case 4:
            ui->smallView4->setScene(scenes[sceneNum]);
@@ -199,6 +213,7 @@ void MainWindow::populateScene()
            ui->smallView4->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
            ui->smallView4->centerOn(0,0);
            ui->text4->setText("4");
+           ui->viewButton4->setEnabled(true);
            break;
        case 5:
            ui->smallView5->setScene(scenes[sceneNum]);
@@ -206,6 +221,7 @@ void MainWindow::populateScene()
            ui->smallView5->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
            ui->smallView5->centerOn(0,0);
            ui->text5->setText("5");
+           ui->viewButton5->setEnabled(true);
            break;
        default:
           ui->nextPushButton->setEnabled(true);
@@ -311,8 +327,6 @@ void MainWindow::on_toolButton_2_clicked()
 
 void MainWindow::on_nextButton_clicked()
 {
-    firstSceneDisplayed++;
-    std::cout << "Made it here" << std::endl;
         QRectF bounds;
         ui->smallView1->setScene(scenes[firstSceneDisplayed]);
          bounds = spriteEditorScene->itemsBoundingRect();
@@ -330,7 +344,6 @@ void MainWindow::on_nextButton_clicked()
          bounds = spriteEditorScene->itemsBoundingRect();
          ui->smallView3->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
          ui->smallView3->centerOn(0,0);
-         std::cout << "On case 3" << std::endl;
          ui->text3->setText(QString::number(firstSceneDisplayed + 3));
 
          ui->smallView4->setScene(scenes[firstSceneDisplayed + 3]);
@@ -347,10 +360,78 @@ void MainWindow::on_nextButton_clicked()
 
          ui->previousPushButton->setEnabled(true);
 
+         if (firstSceneDisplayed + 6 > scenes.size())
+             ui->nextPushButton->setEnabled(false);
 
+         firstSceneDisplayed++;
+
+        setLeftSlots();
 }
 
 void MainWindow::on_prevButton_clicked()
 {
+     QRectF bounds;
+     ui->smallView1->setScene(scenes[firstSceneDisplayed - 2]);
+     bounds = spriteEditorScene->itemsBoundingRect();
+     ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+     ui->smallView1->centerOn(0,0);
+     ui->text1->setText(QString::number(firstSceneDisplayed -1));
 
+     ui->smallView2->setScene(scenes[firstSceneDisplayed - 1]);
+     bounds = spriteEditorScene->itemsBoundingRect();
+     ui->smallView2->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+     ui->smallView2->centerOn(0,0);
+     ui->text2->setText(QString::number(firstSceneDisplayed));
+
+     ui->smallView3->setScene(scenes[firstSceneDisplayed]);
+     bounds = spriteEditorScene->itemsBoundingRect();
+     ui->smallView3->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+     ui->smallView3->centerOn(0,0);
+     ui->text3->setText(QString::number(firstSceneDisplayed + 1));
+
+     ui->smallView4->setScene(scenes[firstSceneDisplayed + 1]);
+     bounds = spriteEditorScene->itemsBoundingRect();
+     ui->smallView4->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+     ui->smallView4->centerOn(0,0);
+     ui->text4->setText(QString::number(firstSceneDisplayed + 2));
+
+     ui->smallView5->setScene(scenes[firstSceneDisplayed + 2]);
+     bounds = spriteEditorScene->itemsBoundingRect();
+     ui->smallView5->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
+     ui->smallView5->centerOn(0,0);
+     ui->text5->setText(QString::number(firstSceneDisplayed + 3));
+
+     ui->nextPushButton->setEnabled(true);
+
+     if (firstSceneDisplayed - 2 == 0)
+         ui->previousPushButton->setEnabled(false);
+
+     firstSceneDisplayed--;
+
+     setLeftSlots();
+}
+
+void MainWindow::on_clickedScene(int scene){
+    ui->SpriteEditor->setScene(scenes[scene]);
+}
+
+void MainWindow::setLeftSlots(){
+    QSignalMapper *mapper = new QSignalMapper(this);
+
+    connect(ui->viewButton1, SIGNAL(clicked()), mapper, SLOT(map()));
+    mapper->setMapping(ui->viewButton1, firstSceneDisplayed - 1);
+
+    connect(ui->viewButton2, SIGNAL(clicked()), mapper, SLOT(map()));
+    mapper->setMapping(ui->viewButton2, firstSceneDisplayed);
+
+    connect(ui->viewButton3, SIGNAL(clicked()), mapper, SLOT(map()));
+    mapper->setMapping(ui->viewButton3, firstSceneDisplayed + 1);
+
+    connect(ui->viewButton4, SIGNAL(clicked()), mapper, SLOT(map()));
+    mapper->setMapping(ui->viewButton4, firstSceneDisplayed + 2);
+
+    connect(ui->viewButton5, SIGNAL(clicked()), mapper, SLOT(map()));
+    mapper->setMapping(ui->viewButton5, firstSceneDisplayed + 3);
+
+    connect(mapper, SIGNAL(mapped(int)), this, SLOT(on_clickedScene(int)));
 }
