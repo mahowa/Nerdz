@@ -42,6 +42,8 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     //Initialize sceneIndex
     sceneIndex = 0;
 
+
+
     //Start SceneTimer
     sceneTimer = new QTimer(this);
     sceneTimer->start(100);
@@ -51,6 +53,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
 
     // Set isRotated to false
     isRotated = false;
+    eraseOn = false;
 
     ui->speedSlider->setValue(1);
     ui->currentColorPallete->setPalette(color);
@@ -59,13 +62,18 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->xAxisTrans, SIGNAL(clicked(bool)), this, SLOT(xAxisTransSlot()));
     connect (ui->yAxisTrans, SIGNAL(clicked(bool)), this, SLOT(yAxisTransSlot()));
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
-    connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
+<<<<<<< HEAD
     connect (ui->loadBtn, SIGNAL(clicked()), this, SLOT(on_LoadFileButton_clicked()));
+=======
+    connect (ui->submitButton, SIGNAL(clicked()), this, SLOT(submitDimensions()));
+    connect (ui->erasePushButton, SIGNAL(clicked(bool)), this, SLOT(on_eraseClicked()));
+>>>>>>> origin/master
     connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
     connect (ui->nextPushButton, SIGNAL(clicked()), this, SLOT(on_nextButton_clicked()));
     connect (ui->previousPushButton, SIGNAL(clicked()), this, SLOT(on_prevButton_clicked()));
 
+<<<<<<< HEAD
     tilesWide = 16;
     tilesTall = 16;
 
@@ -73,6 +81,9 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     isLoad = true;
     //Set up the tiles
     populateScene();
+=======
+
+>>>>>>> origin/master
 
     // Set push buttons
     ui->nextPushButton->setEnabled(false);
@@ -89,19 +100,65 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     // Set scene display tracker
     firstSceneDisplayed = 1;
 
+    isLoad = true;
+
     setLeftSlots();
+
+    //populateScene();
 
 }
 
+/* Destructor
+ * deletes the user interface
+*/
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
+/*
+ * Swap Method
+ * Returns: A boolean if a swap has been made
+ * Parameters: A boolean variabe if a swap has been made
+*/
 bool boolSwap(bool a){
   return !a;
 }
 
+
+void MainWindow::submitDimensions()
+{
+    tilesWide = ui->width->value();
+    tilesTall = ui->height->value();
+
+    populateScene();
+    connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
+    ui->submitButton->setEnabled(false);
+
+}
+
+void MainWindow::on_eraseClicked()
+{
+    eraseOn = !eraseOn;
+
+    if (eraseOn)
+    {
+        color = QColor(211, 211, 211);
+        color= QColor(169, 169, 169);
+    }
+    else
+    {
+        on_colorChooser_clicked();
+    }
+}
+
+/* Populate Scene Method
+ * Returns: Void
+ * Parameters: Void
+ * This method creates a new scene
+ * where one can draw a sprite
+ * Opens a new QGraphicsScene
+*/
 void MainWindow::populateScene()
 {
     spriteEditorScene = new QGraphicsScene;
@@ -114,6 +171,13 @@ void MainWindow::populateScene()
     ui->SpriteEditor->setScene(spriteEditorScene);
 
 
+<<<<<<< HEAD
+=======
+
+    //tilesWide = 16.0;
+   // tilesTall = 16.0;
+
+>>>>>>> origin/master
     double width = ui->SpriteEditor->width();
     double height = ui->SpriteEditor->height();
 
@@ -178,9 +242,6 @@ void MainWindow::populateScene()
 
             item->setPos(QPointF(j, i));
             spriteEditorScene->addItem(item);
-//            tiles.push_back(item);
-
-
         }
 }
     //Add current scene to scenesView
@@ -189,14 +250,6 @@ void MainWindow::populateScene()
     ui->scenesView->fitInView(bounds,Qt::KeepAspectRatio);
     ui->scenesView->setFrameRect(bounds.toAlignedRect());
 
-     // ui->scenesView->centerOn(0,0);
-
-    //  ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
-
-      //updateScene();
-
-      //            // Small view exampl
-      //            QGraphicsScene *testScene(spriteEditorScene);
       int sceneNum = scenes.size() - 1;
       //QRectF bounds;
       switch (scenes.size()) {
@@ -246,12 +299,22 @@ void MainWindow::populateScene()
        }
 }
 
+/* New Scene
+ * Parameters: Void
+ * Returns: Void
+ * Creates a new populate scene
+*/
 void MainWindow::newScene()
 {
     populateScene();
 }
 
-
+/* Update Scene
+ * Returns: Void
+ * Parameters: Void
+ * This method adds another scene to a vector
+ * which holds multiple scenes.
+*/
 void MainWindow::updateScene()
 {
 
@@ -267,7 +330,13 @@ void MainWindow::updateScene()
 }
 
 
-
+/* xAxisTrans Rotation Method
+ * Parameters: Void
+ * Returns: Void
+ * This method translates/rotates the sprite
+ * image across the x-axis
+ *
+*/
 void MainWindow::xAxisTransSlot() {
     QGraphicsItemGroup *group = spriteEditorScene->createItemGroup(spriteEditorScene->items());
     QTransform mirror;
@@ -281,6 +350,13 @@ void MainWindow::xAxisTransSlot() {
     spriteEditorScene->destroyItemGroup(group);
 }
 
+/* yAxisTrans Rotation Method
+ * Parameters: Void
+ * Returns: Void
+ * This method translates/rotates the sprite
+ * image across the y-axis
+ *
+*/
 void MainWindow::yAxisTransSlot() {
     QGraphicsItemGroup *group = spriteEditorScene->createItemGroup(spriteEditorScene->items());
 
@@ -295,6 +371,13 @@ void MainWindow::yAxisTransSlot() {
     spriteEditorScene->destroyItemGroup(group);
 }
 
+/* TransRotation Method
+ * Parameters: Void
+ * Returns: Void
+ * This method rotates the sprite
+ * image in 45 degree increments in
+ * a counter-clockwise direction
+*/
 void MainWindow::rotateTransSlot() {
     QGraphicsItemGroup *group = spriteEditorScene->createItemGroup(spriteEditorScene->items());
     group->setRotation(90);
@@ -303,6 +386,13 @@ void MainWindow::rotateTransSlot() {
     isRotated = !isRotated;
 }
 
+/* On_horizontalSlider_valueChanged
+ * Parmeters: Void
+ * Returns: Void
+ * This method signals when the value
+ * on the slider has changed so it
+ * can be updated accordingly with the view
+*/
 void MainWindow::on_horizontalSlider_valueChanged()
 {
     if(ui->speedSlider->value() == 0)
@@ -316,19 +406,34 @@ void MainWindow::on_horizontalSlider_valueChanged()
     }
 }
 
+/* On_colorChooser_clicked
+ * Parmeters: Void
+ * Returns: Void
+ * This method signals when the color chooser
+ * button has been clicked. The color chooser
+ * is displayed and a color is selected by
+ * the user and stored. Then the color that is
+ * selected is displayed in the current color
+ * window
+*/
 void MainWindow::on_colorChooser_clicked()
 {
     color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
     QPalette pal = ui->currentColorPallete->palette();
     pal.setColor(QPalette::Window, color);
     ui->currentColorPallete->setPalette(pal);
-
-    //emit colorChanged(mColor);
 }
 
 
 
 
+/*
+ * On NextButton Clicked Method
+ * Returns: Void
+ * Parameters: Void
+ * This method moves to the next scene created
+ * in the list of scenes
+*/
 void MainWindow::on_nextButton_clicked()
 {
         QRectF bounds;
@@ -372,6 +477,13 @@ void MainWindow::on_nextButton_clicked()
         setLeftSlots();
 }
 
+/*
+ * On PrevButton Clicked Method
+ * Returns: Void
+ * Parameters: Void
+ * This method moves to the previous scene created
+ * in the list of scenes
+*/
 void MainWindow::on_prevButton_clicked()
 {
      QRectF bounds;
@@ -415,10 +527,25 @@ void MainWindow::on_prevButton_clicked()
      setLeftSlots();
 }
 
+/*
+ * On Clicked Scene Method
+ * Returns: Void
+ * Parameters: An int
+ * This method selects a certain scene that
+ * has been clicked in the list of scenes and loads the
+ * scene in the main window
+*/
 void MainWindow::on_clickedScene(int scene){
+    spriteEditorScene = scenes[scene];
     ui->SpriteEditor->setScene(scenes[scene]);
 }
 
+/*
+ * Set Left Slots method
+ * Returns: Void
+ * Parameters: None
+ * This method fills the left sidebar boxes with scenes.
+*/
 void MainWindow::setLeftSlots(){
     QSignalMapper *mapper = new QSignalMapper(this);
 
@@ -439,6 +566,14 @@ void MainWindow::setLeftSlots(){
 
     connect(mapper, SIGNAL(mapped(int)), this, SLOT(on_clickedScene(int)));
 }
+
+/*
+ * On SaveFile Clicked Method
+ * Returns: Void
+ * Parameters: Void
+ * This method saves all of the scenes created
+ * and all the colors and attributes of the tiles
+*/
 void MainWindow::on_SaveFileButton_clicked()
 {
     QList<QGraphicsItem*> TileGraphicItem;
@@ -495,6 +630,7 @@ void MainWindow::on_LoadFileButton_clicked(){
         QString line = in.readLine();
         QStringList fields = line.split(" ");
 
+<<<<<<< HEAD
         if(rowCounter == 0)
         {
             tilesWide = QString(fields.at(0)).toInt();
@@ -521,6 +657,17 @@ void MainWindow::on_LoadFileButton_clicked(){
                     continue;
                 }
             }
+=======
+/*
+ * New Scene Test
+ * Returns: Void
+ * Parameters: Void
+ * This method tests to see if a new scene is created
+*/
+void MainWindow:: newSceneCountTest()
+{
+    std::cout << "Running newSceneCountTest" << std::endl;
+>>>>>>> origin/master
 
         }
     }
@@ -528,6 +675,19 @@ void MainWindow::on_LoadFileButton_clicked(){
         double width = ui->SpriteEditor->width();
         double height = ui->SpriteEditor->height();
 
+<<<<<<< HEAD
+=======
+/*
+ * Next Scene Test
+ * Returns: Void
+ * Parameters: Void
+ * This method tests to see if a next scene is selected
+ * and displayed in the main window area
+*/
+void MainWindow:: nextSceneButtonTest()
+{
+    std::cout << "Running nextSceneButtonTest" << std::endl;
+>>>>>>> origin/master
 
         if(tilesWide< tilesTall){
             width *= ((double)tilesWide/(double) tilesTall);
@@ -542,15 +702,40 @@ void MainWindow::on_LoadFileButton_clicked(){
         rect.setWidth(width);
         ui->SpriteEditor->setGeometry(rect);
 
+<<<<<<< HEAD
+=======
+/*
+ * Prev Scene Test
+ * Returns: Void
+ * Parameters: Void
+ * This method tests to see if a prev scene is selected
+ * and displayed in the main window area
+*/
+void MainWindow:: prevSceneButtonTest()
+{
+    std::cout << "Running prevSceneButtonTest" << std::endl;
+>>>>>>> origin/master
 
         //Number of tiles per row & height
         int squareCount = tilesWide * tilesTall;
 
 
 
+<<<<<<< HEAD
         double smallestDim = std::min(width,height);
         int smallestTileLength = std::min(tilesWide,tilesTall);
         double tilesize = smallestDim/smallestTileLength;
+=======
+/*
+ * Scene Item Count Test
+ * Returns: Void
+ * Parameters: Void
+ * This method tests to see how many scenes are in the program
+*/
+void MainWindow:: sceneItemCount()
+{
+    std::cout << "Running sceneItemCount on 16x16 scene" << std::endl;
+>>>>>>> origin/master
 
 
           int colorIndex = 0;
