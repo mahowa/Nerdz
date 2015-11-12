@@ -231,7 +231,7 @@
      </size>
     </property>
    </widget>
-   <widget class="QToolButton" name="toolButton_2">
+   <widget class="QToolButton" name="loadBtn">
     <property name="geometry">
      <rect>
       <x>680</x>

@@ -32,6 +32,7 @@
 #include <QFileDialog>
 #include <QTextStream>
 
+
 using namespace std;
 //Constructor
 MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWindow)
@@ -60,12 +61,7 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->rotateTrans, SIGNAL(clicked(bool)), this, SLOT(rotateTransSlot()));
     connect (sceneTimer, SIGNAL(timeout()), this, SLOT(updateScene()));
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
-    //connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
-   // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
-
-
-    //color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
-
+    connect (ui->loadBtn, SIGNAL(clicked()), this, SLOT(on_LoadFileButton_clicked()));
     connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
     connect (ui->nextPushButton, SIGNAL(clicked()), this, SLOT(on_nextButton_clicked()));
     connect (ui->previousPushButton, SIGNAL(clicked()), this, SLOT(on_prevButton_clicked()));
@@ -331,10 +327,7 @@ void MainWindow::on_colorChooser_clicked()
 }
 
 
-void MainWindow::on_toolButton_2_clicked()
-{
 
-}
 
 void MainWindow::on_nextButton_clicked()
 {
@@ -467,7 +460,7 @@ void MainWindow::on_SaveFileButton_clicked()
 
      if(file.open(QIODevice::ReadWrite)){
          stream<< tilesTall << " " << tilesWide <<endl;
-         stream<< tilesTall * tilesWide <<endl;
+         stream<< scenes.size() <<endl;
 
 
 
@@ -476,7 +469,7 @@ void MainWindow::on_SaveFileButton_clicked()
          for(int j = 0; j< tileColors.size(); j++){
              columnCounter++;
              QColor color = tileColors.at(j);
-             stream<< color.red() <<" " << color.green() << " " << color.blue()<< " " +color.alpha();
+             stream<< color.red() <<" " << color.green() << " " << color.blue()<< " " <<color.alpha() << " ";
              if(columnCounter == tilesWide){
                  stream << endl;
                  columnCounter =  0;
@@ -485,3 +478,125 @@ void MainWindow::on_SaveFileButton_clicked()
     }
 
 }
+
+
+void MainWindow::on_LoadFileButton_clicked(){
+    QString filename = QFileDialog::getOpenFileName();
+    QFile file(filename);
+    if(!file.open(QIODevice::ReadOnly)) {
+       return;
+    }
+
+    tileColors.clear();
+    QTextStream in(&file);
+
+    int rowCounter = 0;
+    while(!in.atEnd()) {
+        QString line = in.readLine();
+        QStringList fields = line.split(" ");
+
+        if(rowCounter == 0)
+        {
+            tilesWide = QString(fields.at(0)).toInt();
+            tilesTall = QString(fields.at(1)).toInt();
+            rowCounter++;
+            continue;
+        }
+        else if(rowCounter == 1){
+            totalScenes = QString(line).toInt();
+            rowCounter++;
+            continue;
+        }
+        else{
+            int r,g,b,a;
+            //int columns = fields.size();
+            for(int i = 0; i< fields.size(); i+=4){
+                r = QString(fields.at(i)).toInt();
+                g = QString(fields.at(i+1)).toInt();
+                b = QString(fields.at(i+2)).toInt();
+                a = QString(fields.at(i+3)).toInt();
+                tileColors.push_back(QColor::fromRgba(qRgba(r,g,b,a)));
+                if(i+4 == 64){
+                    i++;
+                    continue;
+                }
+            }
+
+        }
+    }
+        QList<QColor> Colors;
+        int i = 0;
+        for(int j = 0; j<totalScenes; j++ ){
+            for(i;i<tilesWide*tilesTall; i++ ){
+                QColor color = tileColors.at(i);
+                Colors.push_back(color);
+
+
+            }
+        }
+        double width = ui->SpriteEditor->width();
+        double height = ui->SpriteEditor->height();
+
+
+        if(tilesWide< tilesTall){
+            width *= (tilesWide/ tilesTall);
+        }
+        else if(tilesTall < tilesWide){
+            height *=(tilesTall/tilesWide);
+        }
+
+
+        QRect rect;
+        rect.setHeight(height);
+        rect.setWidth(width);
+        ui->SpriteEditor->setGeometry(rect);
+
+
+        //Number of tiles per row & height
+        int squareCount = tilesWide * tilesTall;
+
+
+
+        double smallestDim = std::min(width,height);
+        int smallestTileLength = std::min(tilesWide,tilesTall);
+        double tilesize = smallestDim/smallestTileLength;
+
+
+          int colorIndex = 0;
+
+         while(totalScenes--){
+        /*
+         * Traverse the Scene in the Y direction starting
+         * int the top left. (0,0) in our coordinate system
+         * is in the center of the QGraphicsView
+         */
+            for (double k = -height/2; k < height/2; k += tilesize) {
+
+                /*
+                 * Traverse the Scene in the X Directions
+                 */
+                for (double l = -width/2; l < width/2; l += tilesize) {
+
+                    QGraphicsItem *item = new Tile(Colors[colorIndex++], l, k, tilesize, this);
+
+                    item->setPos(QPointF(l, k));
+                    spriteEditorScene->addItem(item);
+
+        //            tiles.push_back(item);
+
+
+                }
+            }
+            //Add current scene to scenesView
+            scenes.push_back(spriteEditorScene);
+            QRectF bounds = spriteEditorScene->sceneRect();
+            ui->scenesView->fitInView(bounds,Qt::KeepAspectRatio);
+            ui->scenesView->setFrameRect(bounds.toAlignedRect());
+
+         }
+
+
+}
+
+
+

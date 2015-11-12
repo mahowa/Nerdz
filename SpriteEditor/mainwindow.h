@@ -47,7 +47,7 @@ public slots:
 private slots:
     void on_colorChooser_clicked();
     void on_SaveFileButton_clicked();
-    void on_toolButton_2_clicked();
+    void on_LoadFileButton_clicked();
     void on_nextButton_clicked();
     void on_prevButton_clicked();
     void on_clickedScene(int scene);
@@ -70,6 +70,7 @@ private:
     int firstSceneDisplayed;
     int tilesWide;
     int tilesTall;
+    int totalScenes;
 
 };
 
