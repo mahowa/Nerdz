@@ -64,12 +64,6 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     connect (ui->newScene, SIGNAL(clicked()), this, SLOT(newScene()));
     connect (ui->submitButton, SIGNAL(clicked()), this, SLOT(submitDimensions()));
     connect (ui->erasePushButton, SIGNAL(clicked(bool)), this, SLOT(on_eraseClicked()));
-    //connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
-   // connect (ui->setRange, SIGNAL(toggled(bool)), this, SLOT(setRangeToggled()));
-
-
-    //color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
-
     connect (ui->speedSlider, SIGNAL(valueChanged(int)), this, SLOT(on_horizontalSlider_valueChanged()));
     connect (ui->nextPushButton, SIGNAL(clicked()), this, SLOT(on_nextButton_clicked()));
     connect (ui->previousPushButton, SIGNAL(clicked()), this, SLOT(on_prevButton_clicked()));
@@ -91,27 +85,31 @@ MainWindow::MainWindow(QWidget *parent) : QMainWindow(parent),ui(new Ui::MainWin
     // Set scene display tracker
     firstSceneDisplayed = 1;
 
-    // Loop until dimensions received
-   // while (tilesWide == 0 && tilesTall == 0)
-   // {
-  //  }
-
     isLoad = true;
-    //Set up the tiles
-   // populateScene();
 
     setLeftSlots();
 
+    //populateScene();
+
 }
 
+/* Destructor
+ * deletes the user interface
+*/
 MainWindow::~MainWindow()
 {
     delete ui;
 }
 
+/*
+ * Swap Method
+ * Returns: A boolean if a swap has been made
+ * Parameters: A boolean variabe if a swap has been made
+*/
 bool boolSwap(bool a){
   return !a;
 }
+
 
 void MainWindow::submitDimensions()
 {
@@ -131,6 +129,7 @@ void MainWindow::on_eraseClicked()
     if (eraseOn)
     {
         color = QColor(211, 211, 211);
+        color= QColor(169, 169, 169);
     }
     else
     {
@@ -138,6 +137,13 @@ void MainWindow::on_eraseClicked()
     }
 }
 
+/* Populate Scene Method
+ * Returns: Void
+ * Parameters: Void
+ * This method creates a new scene
+ * where one can draw a sprite
+ * Opens a new QGraphicsScene
+*/
 void MainWindow::populateScene()
 {
     spriteEditorScene = new QGraphicsScene;
@@ -218,9 +224,6 @@ void MainWindow::populateScene()
 
             item->setPos(QPointF(j, i));
             spriteEditorScene->addItem(item);
-//            tiles.push_back(item);
-
-
         }
 }
     //Add current scene to scenesView
@@ -229,14 +232,6 @@ void MainWindow::populateScene()
     ui->scenesView->fitInView(bounds,Qt::KeepAspectRatio);
     ui->scenesView->setFrameRect(bounds.toAlignedRect());
 
-     // ui->scenesView->centerOn(0,0);
-
-    //  ui->smallView1->fitInView(bounds, Qt::KeepAspectRatioByExpanding);
-
-      //updateScene();
-
-      //            // Small view exampl
-      //            QGraphicsScene *testScene(spriteEditorScene);
       int sceneNum = scenes.size() - 1;
       //QRectF bounds;
       switch (scenes.size()) {
@@ -286,12 +281,22 @@ void MainWindow::populateScene()
        }
 }
 
+/* New Scene
+ * Parameters: Void
+ * Returns: Void
+ * Creates a new populate scene
+*/
 void MainWindow::newScene()
 {
     populateScene();
 }
 
-
+/* Update Scene
+ * Returns: Void
+ * Parameters: Void
+ * This method adds another scene to a vector
+ * which holds multiple scenes.
+*/
 void MainWindow::updateScene()
 {
 
@@ -307,7 +312,13 @@ void MainWindow::updateScene()
 }
 
 
-
+/* xAxisTrans Rotation Method
+ * Parameters: Void
+ * Returns: Void
+ * This method translates/rotates the sprite
+ * image across the x-axis
+ *
+*/
 void MainWindow::xAxisTransSlot() {
     QGraphicsItemGroup *group = spriteEditorScene->createItemGroup(spriteEditorScene->items());
     QTransform mirror;
@@ -321,6 +332,13 @@ void MainWindow::xAxisTransSlot() {
     spriteEditorScene->destroyItemGroup(group);
 }
 
+/* yAxisTrans Rotation Method
+ * Parameters: Void
+ * Returns: Void
+ * This method translates/rotates the sprite
+ * image across the y-axis
+ *
+*/
 void MainWindow::yAxisTransSlot() {
     QGraphicsItemGroup *group = spriteEditorScene->createItemGroup(spriteEditorScene->items());
 
@@ -335,6 +353,13 @@ void MainWindow::yAxisTransSlot() {
     spriteEditorScene->destroyItemGroup(group);
 }
 
+/* TransRotation Method
+ * Parameters: Void
+ * Returns: Void
+ * This method rotates the sprite
+ * image in 45 degree increments in
+ * a counter-clockwise direction
+*/
 void MainWindow::rotateTransSlot() {
     QGraphicsItemGroup *group = spriteEditorScene->createItemGroup(spriteEditorScene->items());
     group->setRotation(90);
@@ -343,6 +368,13 @@ void MainWindow::rotateTransSlot() {
     isRotated = !isRotated;
 }
 
+/* On_horizontalSlider_valueChanged
+ * Parmeters: Void
+ * Returns: Void
+ * This method signals when the value
+ * on the slider has changed so it
+ * can be updated accordingly with the view
+*/
 void MainWindow::on_horizontalSlider_valueChanged()
 {
     if(ui->speedSlider->value() == 0)
@@ -356,14 +388,22 @@ void MainWindow::on_horizontalSlider_valueChanged()
     }
 }
 
+/* On_colorChooser_clicked
+ * Parmeters: Void
+ * Returns: Void
+ * This method signals when the color chooser
+ * button has been clicked. The color chooser
+ * is displayed and a color is selected by
+ * the user and stored. Then the color that is
+ * selected is displayed in the current color
+ * window
+*/
 void MainWindow::on_colorChooser_clicked()
 {
     color = QColorDialog::getColor(Qt::white,this,"Pick a color",QColorDialog::ShowAlphaChannel);
     QPalette pal = ui->currentColorPallete->palette();
     pal.setColor(QPalette::Window, color);
     ui->currentColorPallete->setPalette(pal);
-
-    //emit colorChanged(mColor);
 }
 
 
@@ -459,6 +499,7 @@ void MainWindow::on_prevButton_clicked()
 }
 
 void MainWindow::on_clickedScene(int scene){
+    spriteEditorScene = scenes[scene];
     ui->SpriteEditor->setScene(scenes[scene]);
 }
 
