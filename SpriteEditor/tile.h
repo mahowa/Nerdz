@@ -20,7 +20,7 @@ protected:
     void dragEnterEvent(QGraphicsSceneDragDropEvent * event)Q_DECL_OVERRIDE;
     void hoverEnterEvent(QGraphicsSceneHoverEvent * event)Q_DECL_OVERRIDE;
     void hoverLeaveEvent(QGraphicsSceneHoverEvent * event)Q_DECL_OVERRIDE;
-    void mouseClickReleaseEvent(QGraphicsSceneMouseEvent *event)Q_DECL_OVERRIDE;
+    void mouseClickReleaseEvent(QGraphicsSceneMouseEvent *event);
     //virtual void leaveEvent(QEvent * event);
     //bool sceneEvent ( QEvent * event )Q_DECL_OVERRIDE;
 
